@@ -1,0 +1,23 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true
+    },
+    "extends": [
+      "standard",
+      "standard-react"
+    ],
+    "parser": "babel-eslint",
+    "plugins": [
+      "babel",
+      "react",
+      "promise"
+    ],
+    "rules": {
+      "semi": [2, "never"],
+      "max-len": [2, 120, 2],
+      "generator-star-spacing": 1,
+      "jsx-quotes": [2, "prefer-single"],
+      "quote-props": ["error", "consistent-as-needed"]
+    }
+}
