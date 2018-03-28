@@ -26,6 +26,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+ALLOWED_HOSTS = ['104.131.63.96']
+
+SECRET_KEY = '*(^5+1z7&6ig*ao$a))@&u6u7j2ec-7xxu54wy5$&)wa0t2czc'
 
 # Application definition
 
