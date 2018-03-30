@@ -1,0 +1,28 @@
+# This is an auto-generated Django model module created by ogrinspect.
+from django.contrib.gis.db import models
+
+class lra(models.Model):
+    id = models.CharField(max_length=0)
+    record_no = models.IntegerField()
+    handle = models.BigIntegerField()
+    parcelid = models.BigIntegerField()
+    address = models.IntegerField()
+    add_suffix = models.CharField(max_length=0)
+    direction = models.CharField(max_length=0)
+    name = models.CharField(max_length=0)
+    type = models.CharField(max_length=0)
+    class = models.CharField(max_length=0)
+    acquisition_dt = models.CharField(max_length=0)
+    centerx = models.FloatField()
+    centery = models.FloatField()
+    value = models.FloatField()
+    value_estimated = models.IntegerField()
+    value_est_dt = models.CharField(max_length=0)
+    entered_date = models.CharField(max_length=0)
+    usage = models.CharField(max_length=0)
+    cost = models.FloatField()
+    property_source = models.CharField(max_length=0)
+    purchase_type = models.CharField(max_length=0)
+    parcel_status = models.CharField(max_length=0)
+    fulladdress = models.CharField(max_length=0)
+    geom = models.PointField()
