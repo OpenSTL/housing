@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from housing import views
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^lra/d,d,d,d/', include(admin.site.urls)),
+    url(r'^google/(?P<lat>-?[0-9]\d*(\.\d+)?),(?P<lng>-?[0-9]\d*(\.\d+)?),(?P<zoom>[0-10])z/', views.google_forward, {'lat','lng','zoom'}) ,
+    url(r'^zillow/', include(admin.site.urls)),
 ]
