@@ -1,18 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect, HttpResponse , JsonResponse
 from django.urls import reverse
-import zillow
 import requests
 import json
 
-def google_forward(lat,lng):
+def google_forward(request):
+    lat,lng = request.GET['lat'],request.GET['lng']
     API_KEY = settings.API_KEYS['google_maps']
     URI = "https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&key={API_KEY}".format(lat,lng,API_KEY)
     r = requests.get(url = URI)
     return JsonResponse(r.json())
 
+def lra():
+    
+    pass
 
 def getInfo(request, property_id):
+    import zillow
     with open("./bin/config/zillow_key.conf", 'r') as f:
         key = f.readline().replace("\n", "")
 
