@@ -3,7 +3,6 @@ from django.contrib.gis.geos import Polygon
 from django.core.serializers import serialize 
 from django.http import HttpResponseRedirect, HttpResponse , JsonResponse
 from django.urls import reverse
-import zillow
 import requests
 import json
 
@@ -26,6 +25,7 @@ def lra(request):
     JsonResponse(lraJson)
 
 def getInfo(request, property_id):
+    import zillow
     with open("./bin/config/zillow_key.conf", 'r') as f:
         key = f.readline().replace("\n", "")
 
