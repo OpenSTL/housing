@@ -21,5 +21,5 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^lra/d,d,d,d/', views.lra),
     url(r'^google/$', views.google_forward ) ,
-    url(r'^zillow/$', include(admin.site.urls)),
+    url(r'^zillow/$', views.getInfo),
 ]
