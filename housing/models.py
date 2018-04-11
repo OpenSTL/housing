@@ -1,6 +1,6 @@
 # This is an auto-generated Django model module created by ogrinspect.
+from django.contrib.gis.geos import Polygon
 from django.contrib.gis.db import models
-
 class lra(models.Model):
     id = models.CharField(max_length=0)
     record_no = models.IntegerField()
