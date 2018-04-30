@@ -14,7 +14,7 @@ lml==0.0.1
 lxml==4.2.0
 MarkupSafe==1.0
 oauthlib==2.0.7
-psycopg2==2.7.4
+psycopg2-binary==2.7.4
 pyexcel==0.5.7
 pyexcel-io==0.5.6
 pyexcel-webio==0.1.4
