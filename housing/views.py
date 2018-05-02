@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.contrib.gis.geos import Polygon
 from django.core.serializers import serialize 
-from django.http import HttpResponseRedirect, HttpResponse , JsonResponse
+from django.http import HttpResponseRedirect, HttpResponse , JsonResponse, Http404
 from django.urls import reverse
-import requests
+from models import Lra
 import json
+import requests
+#import json
 
 def google_forward(request):
     lat,lng = request.GET['lat'],request.GET['lng']
@@ -14,15 +16,20 @@ def google_forward(request):
     return JsonResponse(r.json())
 
 def lra(request):
-    lraJson = serialize('geojson',lra.objects.all())
-    JsonResponse(lraJson)
+    lraJson = serialize('geojson',Lra.objects.all(), fields=('id','handle',))
+    if lraJson: 
+        result = json.loads(lraJson)
+        return  JsonResponse(result) 
+    else:
+        return Http404
 
 def lra_byId(id):
-    parcelJson = serialize('json',lra.objects.get(pk=id))
-    JsonResponse(parcelJson)
+    parcelJson = serialize('geojson',Lra.objects.get(pk=id))
+    JsonResponse(json.loads(parcelJson))
 
 def getInfo(request,property_id):
-    import zillow with open("./bin/config/zillow_key.conf", 'r') as f:
+    import zillow 
+    with open("./bin/config/zillow_key.conf", 'r') as f:
         key = f.readline().replace("\n", "")
     api = zillow.ValuationApi()
     property = get_object_or_404(Property, pk=property_id)
