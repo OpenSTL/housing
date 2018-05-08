@@ -1,0 +1,9 @@
+[Unit]
+Description= housing api 
+[Service]
+WorkingDirectory=/srv/housing/
+ExecStart=/srv/housing/manage.py runserver 0.0.0.0:8000
+User=root
+Group=root
+[Install]
+WantedBy=multi-user.target
