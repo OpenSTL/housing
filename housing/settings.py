@@ -24,9 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-ALLOWED_HOSTS = ['104.131.63.96']
+ALLOWED_HOSTS = ['localhost']
 
 SECRET_KEY = '*(^5+1z7&6ig*ao$a))@&u6u7j2ec-7xxu54wy5$&)wa0t2czc'
 
@@ -109,7 +107,7 @@ STATIC_URL = '/static/'
 
 
 try:
-        from local_settings import *
+    from local_settings import *
 except ImportError:
-        pass
+    pass
 
