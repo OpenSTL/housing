@@ -16,7 +16,7 @@ def google_forward(request):
     return JsonResponse(r.json())
 
 def lra(request):
-    lraJson = serialize('geojson',Lra.objects.all(), fields=('id','handle',))
+    lraJson = serialize('geojson',Lra.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
     if lraJson: 
         result = json.loads(lraJson)
         return  JsonResponse(result) 
