@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'corsheaders',
     'housing',
 )
 
@@ -50,6 +51,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 )
 
 ROOT_URLCONF = 'housing.urls'
@@ -105,6 +108,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# cross origin request allowed 
+CORS_ORIGIN_WHITELIST = []
+CORS_ORIGIN_ALLOW_ALL = DEBUG 
 
 try:
     from local_settings import *
