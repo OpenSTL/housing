@@ -3,7 +3,7 @@ from django.contrib.gis.geos import Polygon
 from django.core.serializers import serialize 
 from django.http import HttpResponseRedirect, HttpResponse , JsonResponse, Http404
 from django.urls import reverse
-from models import Lra
+from models import Lra,Landmarks,PublicHousing
 import json
 import requests
 #import json
@@ -14,6 +14,38 @@ def google_forward(request):
     URI = "https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&key={API_KEY}".format(lat,lng,API_KEY)
     r = requests.get(url = URI)
     return JsonResponse(r.json())
+
+
+def publichousing(request):
+    publichousingJson = serialize('geojson',PublicHousing.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
+    if publichousingJson: 
+        result = json.loads(publichousingJson)
+        return  JsonResponse(result) 
+    else:
+        return Http404
+
+def publichousing_byId(id):
+    parcelJson = serialize('geojson',PublicHousing.objects.get(pk=id))
+    JsonResponse(json.loads(parcelJson))
+
+
+
+
+def landmarks(request):
+    landmarksJson = serialize('geojson',Landmarks.objects.all(), geometry_field='wkb_geometry',fields=('ogc_fid','st_louis_field ',))
+    if landmarksJson: 
+        result = json.loads(landmarksJson)
+        return  JsonResponse(result) 
+    else:
+        return Http404
+
+def landmarks_byId(id):
+    parcelJson = serialize('geojson',Landmarks.objects.get(pk=id))
+    JsonResponse(json.loads(parcelJson))
+
+
+
+
 
 def lra(request):
     lraJson = serialize('geojson',Lra.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
