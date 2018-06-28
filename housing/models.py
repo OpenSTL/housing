@@ -10,6 +10,31 @@ from __future__ import unicode_literals
 from django.contrib.gis.db import models
 
 
+class Grocery(models.Model):
+    gid = models.AutoField(primary_key=True)
+    status = models.CharField(max_length=1, blank=True, null=True)
+    score = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    match_type = models.CharField(max_length=2, blank=True, null=True)
+    side = models.CharField(max_length=1, blank=True, null=True)
+    x = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    y = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    match_addr = models.CharField(max_length=135, blank=True, null=True)
+    arc_street = models.CharField(max_length=60, blank=True, null=True)
+    arc_city = models.CharField(max_length=40, blank=True, null=True)
+    arc_state = models.CharField(max_length=20, blank=True, null=True)
+    arc_zip = models.CharField(max_length=12, blank=True, null=True)
+    store_name = models.CharField(max_length=254, blank=True, null=True)
+    street = models.CharField(max_length=254, blank=True, null=True)
+    city = models.CharField(max_length=254, blank=True, null=True)
+    state = models.CharField(max_length=254, blank=True, null=True)
+    zip = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    geom = models.PointField(srid=0, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'grocery'
+
+
 class Lra(models.Model):
     ogc_fid = models.AutoField(primary_key=True)
     id = models.CharField(max_length=128, blank=True, null=True)
