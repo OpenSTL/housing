@@ -11,6 +11,11 @@ import requests
 def homer(min_price,max_price,minSqft,kid_friendly,grocery,distance_to_metro):
     pass
 
+def hood(request):
+    VacantParcels.objects.get()
+    hoods = []
+    return HttpResponse(hoods)
+    
 
 def google_forward(request):
     lat,lng = request.GET['lat'],request.GET['lng']

@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^publichousing/', views.publichousing),
     url(r'^publichousing/byId/(?P<id>d+)', views.publichousing_byId),
     url(r'^lra/', views.lra),
-    url('r^lra/byId/(?P<id>d+)/$',views.lra)
+    url('r^lra/byId/(?P<id>d+)/$',views.lra),
+    url(r'^hoods/$', views.hoods)
     #url(r'^zillow/$', include(admin.site.urls)),
 ]
