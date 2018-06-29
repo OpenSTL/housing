@@ -8,6 +8,10 @@ import json
 import requests
 #import json
 
+def homer(min_price,max_price,minSqft,kid_friendly,grocery,distance_to_metro):
+    pass
+
+
 def google_forward(request):
     lat,lng = request.GET['lat'],request.GET['lng']
     API_KEY = settings.API_KEYS['google_maps']
@@ -45,8 +49,6 @@ def landmarks_byId(id):
 
 
 
-
-
 def lra(request):
     lraJson = serialize('geojson',Lra.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
     if lraJson: 
@@ -71,9 +73,3 @@ def getInfo(request,property_id):
     return HttpResponse(json.dumps({'foo': 'bar'}), mimetype='application/json')
     #return HttpResponseRedirect(reverse('property', args=(property.id,)))
 
-"""<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
-<script type="text/javascript">
- $.get('/ajax/', function(data) {
-   alert(data['foo']);
- });
-</script>"""
