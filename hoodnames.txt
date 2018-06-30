@@ -1,0 +1,75 @@
+0                                    NaN
+1                                LaSalle
+2                            Carr Square
+3                    Old North St. Louis
+4                                Soulard
+5                  Peabody, Darst, Webbe
+6                       Lafayette Square
+7                        St. Louis Place
+8                                Midtown
+9                              Hyde Park
+10                    Gate District, The
+11                       Compton Heights
+12                      McKinley Heights
+13                           Benton Park
+14                              Fox Park
+15                      Tower Grove East
+16                      Benton Park West
+17                          Marine Villa
+18                          Gravois Park
+19                     Tower Grove South
+20             Covenant Blu/Grand Center
+21                        Jeff VanderLou
+22               Fairground Neighborhood
+23                                  Shaw
+24                               Tiffany
+25                    Greater Ville, The
+26                          College Hill
+27                             Dutchtown
+28                        Mount Pleasant
+29                          Clayton/Tamm
+30                       Clifton Heights
+31                            Carondelet
+32                            Cheltenham
+33                              West End
+34                       Visitation Park
+35                               Academy
+36                                 Patch
+37                              O'Fallon
+38                               Penrose
+39                            Ville, The
+40                           Lewis Place
+41                           Vandeventer
+42                         Fountain Park
+43                         Kingsway East
+44                      Wells/Goodfellow
+45                      Hamilton Heights
+46                     DeBaliviere Place
+47                      Central West End
+48                 Forest Park Southeast
+49                             Kings Oak
+50                             Hill, The
+51                      Southwest Garden
+52                                 Baden
+53                           North Point
+54                      Walnut Park West
+55            Mark Twain/I-70 Industrial
+56                            Mark Twain
+57                         Kingsway West
+58                              Hi-Point
+59                           Holly Hills
+60                         North Hampton
+61                       Lindenwood Park
+62                             Ellendale
+63                            Franz Park
+64    Botanical Heights f/k/a McRee Town
+65                      Walnut Park East
+66                          Southhampton
+67                     Princeton Heights
+68                     Boulevard Heights
+69                             Bevo Mill
+70                   Skinker/DeBaliviere
+71                        Wydown/Skinker
+72                             Riverview
+73                       St. Louis Hills
+
