@@ -3,7 +3,7 @@ from django.contrib.gis.geos import Polygon
 from django.core.serializers import serialize 
 from django.http import HttpResponseRedirect, HttpResponse , JsonResponse, Http404
 from django.urls import reverse
-from models import Lra,Landmarks,PublicHousing
+from models import Lra,Landmarks,PublicHousing,VacantParcels
 import json
 import requests
 #import json
@@ -12,7 +12,7 @@ def vacant_parcels(request):
     VacantParcelsJson = serialize('json',VacantParcels.objects.all(), fields=('index','handle',))
     if VacantParcelsJson: 
         result = json.loads(VacantParcelsJson)
-        return  JsonResponse(result) 
+        return  JsonResponse(result, safe=False) 
     else:
         return Http404
 def vacant_parcels_byId(id):

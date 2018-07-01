@@ -111,7 +111,7 @@ class VacantParcels(models.Model):
     index = models.BigIntegerField(blank=True, null=True)
     fid = models.BigIntegerField(db_column='FID', blank=True, null=True)  # Field name made lowercase.
     objectid = models.BigIntegerField(db_column='OBJECTID', blank=True, null=True)  # Field name made lowercase.
-    handle = models.BigIntegerField(db_column='HANDLE', blank=True, null=True)  # Field name made lowercase.
+    handle = models.BigIntegerField(primary_key=True,db_column='HANDLE', blank=True )  # Field name made lowercase.
     siteaddr = models.TextField(db_column='SITEADDR', blank=True, null=True)  # Field name made lowercase.
     inside_x = models.FloatField(db_column='INSIDE_X', blank=True, null=True)  # Field name made lowercase.
     inside_y = models.FloatField(db_column='INSIDE_Y', blank=True, null=True)  # Field name made lowercase.
