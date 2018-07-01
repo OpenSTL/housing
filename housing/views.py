@@ -8,14 +8,20 @@ import json
 import requests
 #import json
 
-def homer(min_price,max_price,minSqft,kid_friendly,grocery,distance_to_metro):
-    pass
+def vacant_parcels(request):
+    VacantParcelsJson = serialize('json',VacantParcels.objects.all(), fields=('index','handle',))
+    if VacantParcelsJson: 
+        result = json.loads(VacantParcelsJson)
+        return  JsonResponse(result) 
+    else:
+        return Http404
+def vacant_parcels_byId(id):
+    VacantParcelJson = serialize('json',VacantParcels.objects.get(pk=index))
+    JsonResponse(json.loads(VacantParcelJson))
 
-def hood(request):
-    VacantParcels.objects.get()
-    hoods = []
-    return HttpResponse(hoods)
-    
+def homer(min_price,max_price,minSqft,nbrhd,plotChoice):
+    VacantParcels.objects.order_by('outcome')[10]
+
 
 def google_forward(request):
     lat,lng = request.GET['lat'],request.GET['lng']
@@ -36,9 +42,6 @@ def publichousing(request):
 def publichousing_byId(id):
     parcelJson = serialize('geojson',PublicHousing.objects.get(pk=id))
     JsonResponse(json.loads(parcelJson))
-
-
-
 
 def landmarks(request):
     landmarksJson = serialize('geojson',Landmarks.objects.all(), geometry_field='wkb_geometry',fields=('ogc_fid','st_louis_field ',))
