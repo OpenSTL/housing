@@ -20,8 +20,8 @@ def vacant_parcels_byId(id):
     JsonResponse(json.loads(VacantParcelJson))
 
 def homer(min_price,max_price,minSqft,nbrhd,plotChoice):
-    VacantParcels.objects.order_by('outcome')[10]
-
+    #VacantParcels.objects.order_by('outcome')[10]
+    VacantParcels.objects.filter(vacant_price_gte=min_price,vacant_price_lte=max_price,sqft_gt=minSqft)
 
 def google_forward(request):
     lat,lng = request.GET['lat'],request.GET['lng']
