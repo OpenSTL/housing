@@ -1,11 +1,13 @@
 <html>
 <head>
+    {% block head%}
 <meta charset=utf-8 />
 <title>Find Your Lot!</title>
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
 <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    {% endblock head %}
 <style>
   body { margin:0; padding:0; }
   
@@ -81,6 +83,7 @@ select {
 <body>
 <div id='map-container'>
 <div id='map'></div>
+{%block nav%}
 <div id="form">
   <form>
     <p>What is your purpose. </p>
@@ -107,24 +110,26 @@ select {
 
     <br/><br/><input type="button" value="Submit" oneClick="exchangeData()" ></input>
   </form>
-</div>
-</div>
-
+</div> <!-- end form-->    
+{%endblock nav%}
 <script>
-L.mapbox.accessToken = 'pk.eyJ1IjoibXJhbzIiLCJhIjoiY2ppZmFoazE5MGZiMjNwcXBtb3gyenk4cyJ9.nmFZofR-kOqj8yYfaJc2XQ';
+    L.mapbox.accessToken = {{API_KEYS.mapbox}}
 
 var map = L.mapbox.map('map','mapbox.streets').setView([38.6270, -90.1994], 12);
 var featurelayer = L.mapbox.featureLayer().addTo(map);
-featurelayer.loadURL("http://104.131.63.96/publichousing/")
+featurelayer.loadURL("http://104.131.63.96/landmarks/")
         
-let dropdown = $('#nbrhd');
-const url = 'thard.us/st-louis-neighborhoods.json';
-$.getJSON(url, function (data) {
-  $.each(data, function (key, entry) {
-    dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
-  })
-});
-</script>
+var neighborhoods = new Array("Academy", "Baden", "Benton Park", "Benton Park West", "Bevo Mill", "Botanical Heights f/k/a McRee Town", "Boulevard Heights", "Carondelet", "Carr Square", "Central West End", "Cheltenham", "Clayton/Tamm", "Clifton Heights", "College Hill", "Compton Heights", "Covenant Blu/Grand Center", "DeBaliviere Place", "Dutchtown", "Ellendale", "Fairground Neighborhood", "Forest Park Southeast", "Fountain Park", "Fox Park", "Franz Park", "Gate District, The", "Gravois Park", "Greater Ville, The", "Hamilton Heights", "Hi-Point", "Hill, The", "Holly Hills", "Hyde Park", "Jeff VanderLou", "Kings Oak", "Kingsway East", "Kingsway West", "LaSalle", "Lafayette Square", "Lewis Place", "Lindenwood Park", "Marine Villa", "Mark Twain", "Mark Twain/I-70 Industrial", "McKinley Heights", "Midtown", "Mount Pleasant", "North Hampton", "North Point", "O'Fallon", "Old North St. Louis", "Patch", "Peabody, Darst, Webbe", "Penrose", "Princeton Heights", "Riverview", "Shaw", "Skinker/DeBaliviere", "Soulard", "Southhampton", "Southwest Garden", "St. Louis Hills", "St. Louis Place", "Tiffany", "Tower Grove East", "Tower Grove South", "Vandeventer", "Ville, The", "Visitation Park", "Walnut Park East", "Walnut Park West", "Wells/Goodfellow", "West End", "Wydown/Skinker");
+var select = document.getElementById("nbrhd");
+counter = 0;
+for (neighborhood in neighborhoods) {
+    var option = document.createElement("option");
+    option.text = neighborhoods[counter];
+    option.id = ++counter;
+    select.add(option);
+}
 
+</script>
+</div> <!--end map-container-->
 </body>
 </html>
