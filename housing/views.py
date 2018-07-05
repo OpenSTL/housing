@@ -21,8 +21,12 @@ def vacant_parcels_byId(id):
 
 def homer(min_price,max_price,minSqft,nbrhd,plotChoice):
     #VacantParcels.objects.order_by('outcome')[10]
-    VacantParcels.objects.filter(vacant_price_gte=min_price,vacant_price_lte=max_price,sqft_gt=minSqft)
-
+    userQuery= VacantParcels.objects.filter(vacant_price_gte=min_price,vacant_price_lte=max_price,sqft_gt=minSqft)
+    if userQuery:
+        resultJson = serialize('json',userQuery)
+        JsonResponse(json.loads(resultJson))
+    else:
+        return Http404 
 def google_forward(request):
     lat,lng = request.GET['lat'],request.GET['lng']
     API_KEY = settings.API_KEYS['google_maps']
