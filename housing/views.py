@@ -3,30 +3,25 @@ from django.contrib.gis.geos import Polygon
 from django.core.serializers import serialize 
 from django.http import HttpResponseRedirect, HttpResponse , JsonResponse, Http404
 from django.urls import reverse
-from models import Lra,Landmarks,PublicHousing,VacantParcels
+from models import BuildingFootprints,Landmarks,PublicHousing,VacantParcels
 import json
 import requests
 #import json
 
-def vacant_parcels(request):
-    VacantParcelsJson = serialize('json',VacantParcels.objects.all(), fields=('index','handle',))
-    if VacantParcelsJson: 
-        result = json.loads(VacantParcelsJson)
-        return  JsonResponse(result, safe=False) 
-    else:
-        return Http404
 def vacant_parcels_byId(id):
-    VacantParcelJson = serialize('json',VacantParcels.objects.get(pk=index))
+    VacantParcelJson = serialize('json',VacantParcels.objects.get(pk=handel))
     JsonResponse(json.loads(VacantParcelJson))
 
 def homer(min_price,max_price,minSqft,nbrhd,plotChoice):
-    #VacantParcels.objects.order_by('outcome')[10]
+    #BuildingFootprints.objects.filter('')
     userQuery= VacantParcels.objects.filter(vacant_price_gte=min_price,vacant_price_lte=max_price,sqft_gt=minSqft)
     if userQuery:
         resultJson = serialize('json',userQuery)
         JsonResponse(json.loads(resultJson))
     else:
         return Http404 
+
+
 def google_forward(request):
     lat,lng = request.GET['lat'],request.GET['lng']
     API_KEY = settings.API_KEYS['google_maps']
@@ -61,8 +56,8 @@ def landmarks_byId(id):
 
 
 
-def lra(request):
-    lraJson = serialize('geojson',Lra.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
+def BuildingFootprints(request):
+    bldngsJson = serialize('geojson',BuildingFootprints.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
     if lraJson: 
         result = json.loads(lraJson)
         return  JsonResponse(result) 
