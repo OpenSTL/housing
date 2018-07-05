@@ -35,36 +35,6 @@ class Grocery(models.Model):
         db_table = 'grocery'
 
 
-class Lra(models.Model):
-    ogc_fid = models.AutoField(primary_key=True)
-    id = models.CharField(max_length=128, blank=True, null=True)
-    record_no = models.IntegerField(blank=True, null=True)
-    handle = models.BigIntegerField(blank=True, null=True)
-    parcelid = models.BigIntegerField(blank=True, null=True)
-    address = models.IntegerField(blank=True, null=True)
-    add_suffix = models.CharField(max_length=128, blank=True, null=True)
-    direction = models.CharField(max_length=128, blank=True, null=True)
-    name = models.CharField(max_length=128, blank=True, null=True)
-    type = models.CharField(max_length=128, blank=True, null=True)
-    class_field = models.CharField(db_column='class', max_length=128, blank=True, null=True)  # Field renamed because it was a Python reserved word.
-    acquisition_dt = models.CharField(max_length=128, blank=True, null=True)
-    centerx = models.FloatField(blank=True, null=True)
-    centery = models.FloatField(blank=True, null=True)
-    value = models.FloatField(blank=True, null=True)
-    value_estimated = models.IntegerField(blank=True, null=True)
-    value_est_dt = models.CharField(max_length=128, blank=True, null=True)
-    entered_date = models.CharField(max_length=128, blank=True, null=True)
-    usage = models.CharField(max_length=128, blank=True, null=True)
-    cost = models.FloatField(blank=True, null=True)
-    property_source = models.CharField(max_length=128, blank=True, null=True)
-    purchase_type = models.CharField(max_length=128, blank=True, null=True)
-    parcel_status = models.CharField(max_length=128, blank=True, null=True)
-    fulladdress = models.CharField(max_length=128, blank=True, null=True)
-    wkb_geometry = models.PointField(blank=True, null=True)
-    class Meta:
-        managed = False
-        db_table = 'lra'
-
 class PublicHousing(models.Model):
     ogc_fid = models.AutoField(primary_key=True)
     loc_name = models.CharField(max_length=14, blank=True, null=True)
@@ -88,7 +58,6 @@ class PublicHousing(models.Model):
     state = models.CharField(max_length=254, blank=True, null=True)
     population = models.CharField(max_length=254, blank=True, null=True)
     wkb_geometry = models.PointField(blank=True, null=True)
-
     class Meta:
         managed = False
         db_table = 'public_housing'
@@ -101,7 +70,6 @@ class Landmarks(models.Model):
     lat_dd = models.DecimalField(max_digits=19, decimal_places=11, blank=True, null=True)
     long_dd = models.DecimalField(max_digits=19, decimal_places=11, blank=True, null=True)
     wkb_geometry = models.PointField(srid=900914, blank=True, null=True)
-
     class Meta:
         managed = False
         db_table = 'landmarks'
