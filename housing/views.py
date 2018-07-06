@@ -3,7 +3,8 @@ from django.contrib.gis.geos import Polygon
 from django.core.serializers import serialize 
 from django.http import HttpResponseRedirect, HttpResponse , JsonResponse, Http404
 from django.urls import reverse
-from models import BuildingFootprints,Landmarks,PublicHousing,VacantParcels
+#from models import BuildingFootprints,Landmarks,PublicHousing,VacantParcels
+from models import Landmarks,PublicHousing,VacantParcels
 import json
 import requests
 #import json

@@ -115,10 +115,10 @@ L.mapbox.accessToken = 'pk.eyJ1IjoibXJhbzIiLCJhIjoiY2ppZmFoazE5MGZiMjNwcXBtb3gye
 
 var map = L.mapbox.map('map','mapbox.streets').setView([38.6270, -90.1994], 12);
 var featurelayer = L.mapbox.featureLayer().addTo(map);
-featurelayer.loadURL("http://104.131.63.96/publichousing/")
+featurelayer.loadURL("/publichousing/")
         
 let dropdown = $('#nbrhd');
-const url = 'thard.us/st-louis-neighborhoods.json';
+const url = '/static/st-louis-neighborhoods.json';
 $.getJSON(url, function (data) {
   $.each(data, function (key, entry) {
     dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
