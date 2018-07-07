@@ -3,7 +3,8 @@ from django.contrib.gis.geos import Polygon
 from django.core.serializers import serialize 
 from django.http import HttpResponseRedirect, HttpResponse , JsonResponse, Http404
 from django.urls import reverse
-from models import BuildingFootprints,Landmarks,PublicHousing,VacantParcels
+#from models import BuildingFootprints,Landmarks,PublicHousing,VacantParcels
+from models import Landmarks,PublicHousing,VacantParcels
 import json
 import requests
 #import json
@@ -13,12 +14,18 @@ def vacant_parcels_byId(id):
     JsonResponse(json.loads(VacantParcelJson))
 
 def homer(minPrice,maxPrice,minSqft,nbrhd,plotChoice):
-    if intention == 'prevBuild':
-        query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
-    elif intention == 'currBuild':
-        query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
-    elif intention == 'noBuild':
-        query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
+    #if intention == 'prevBuild':
+    #    query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
+    #elif intention == 'currBuild':
+    #    query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
+    #elif intention == 'noBuild':
+    #    query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
+    userQuery = VacantParcels.objects.filter(vacant_price_gte=min_price,vacant_price_lte=max_price,sqft_gt=minSqft)
+    if userQuery:
+        resultJson = serialize('geojson',PublicHousing.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
+        return JsonResponse(json.loads(resultJson))
+    else:
+        return Http404 
 
     VacantParcels.objects.filter(vacant_price_gte=min_price,vacant_price_lte=max_price,sqft_gt=minSqft)
 
