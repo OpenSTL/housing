@@ -76,180 +76,162 @@ class Landmarks(models.Model):
 
 
 class VacantParcels(models.Model):
-    index = models.BigIntegerField(blank=True, null=True)
-    fid = models.BigIntegerField(db_column='FID', blank=True, null=True)  # Field name made lowercase.
-    objectid = models.BigIntegerField(db_column='OBJECTID', blank=True, null=True)  # Field name made lowercase.
-    handle = models.BigIntegerField(primary_key=True,db_column='HANDLE', blank=True )  # Field name made lowercase.
-    siteaddr = models.TextField(db_column='SITEADDR', blank=True, null=True)  # Field name made lowercase.
-    inside_x = models.FloatField(db_column='INSIDE_X', blank=True, null=True)  # Field name made lowercase.
-    inside_y = models.FloatField(db_column='INSIDE_Y', blank=True, null=True)  # Field name made lowercase.
-    acres = models.FloatField(db_column='Acres', blank=True, null=True)  # Field name made lowercase.
-    handledbl_x = models.BigIntegerField(db_column='HandleDbl_x', blank=True, null=True)  # Field name made lowercase.
-    fid_1 = models.BigIntegerField(db_column='FID_1', blank=True, null=True)  # Field name made lowercase.
-    objectid_1 = models.BigIntegerField(db_column='OBJECTID_1', blank=True, null=True)  # Field name made lowercase.
-    handle_1 = models.BigIntegerField(db_column='HANDLE_1', blank=True, null=True)  # Field name made lowercase.
-    siteaddr_1 = models.TextField(db_column='SITEADDR_1', blank=True, null=True)  # Field name made lowercase.
-    handle_12 = models.BigIntegerField(db_column='Handle_12', blank=True, null=True)  # Field name made lowercase.
-    ownercat = models.TextField(db_column='OwnerCat', blank=True, null=True)  # Field name made lowercase.
-    vl_final = models.BigIntegerField(db_column='VL_Final', blank=True, null=True)  # Field name made lowercase.
-    vb_final = models.BigIntegerField(db_column='VB_Final', blank=True, null=True)  # Field name made lowercase.
-    vl_a = models.BigIntegerField(db_column='VL_A', blank=True, null=True)  # Field name made lowercase.
-    vl_b = models.BigIntegerField(db_column='VL_B', blank=True, null=True)  # Field name made lowercase.
-    vl_c = models.BigIntegerField(db_column='VL_C', blank=True, null=True)  # Field name made lowercase.
-    vl_d = models.BigIntegerField(db_column='VL_D', blank=True, null=True)  # Field name made lowercase.
-    vl_e = models.BigIntegerField(db_column='VL_E', blank=True, null=True)  # Field name made lowercase.
-    vl_f = models.BigIntegerField(db_column='VL_F', blank=True, null=True)  # Field name made lowercase.
-    vb_a = models.BigIntegerField(db_column='VB_A', blank=True, null=True)  # Field name made lowercase.
-    vb_b = models.BigIntegerField(db_column='VB_B', blank=True, null=True)  # Field name made lowercase.
-    vb_c = models.BigIntegerField(db_column='VB_C', blank=True, null=True)  # Field name made lowercase.
-    vb_d = models.BigIntegerField(db_column='VB_D', blank=True, null=True)  # Field name made lowercase.
-    vb_e = models.BigIntegerField(db_column='VB_E', blank=True, null=True)  # Field name made lowercase.
-    vb_f = models.BigIntegerField(db_column='VB_F', blank=True, null=True)  # Field name made lowercase.
-    vb_g = models.BigIntegerField(db_column='VB_G', blank=True, null=True)  # Field name made lowercase.
-    vb_h = models.BigIntegerField(db_column='VB_H', blank=True, null=True)  # Field name made lowercase.
-    bd_vb17 = models.BigIntegerField(db_column='BD_VB17', blank=True, null=True)  # Field name made lowercase.
-    lu1010 = models.BigIntegerField(db_column='LU1010', blank=True, null=True)  # Field name made lowercase.
-    prclhasbld = models.BigIntegerField(db_column='PrclHasBld', blank=True, null=True)  # Field name made lowercase.
-    prclnobldg = models.BigIntegerField(db_column='PrclNoBldg', blank=True, null=True)  # Field name made lowercase.
-    for_vb18 = models.BigIntegerField(db_column='For_VB18', blank=True, null=True)  # Field name made lowercase.
-    for_vl18 = models.BigIntegerField(db_column='For_VL18', blank=True, null=True)  # Field name made lowercase.
-    lra_vl = models.BigIntegerField(db_column='LRA_VL', blank=True, null=True)  # Field name made lowercase.
-    lra_vb = models.BigIntegerField(db_column='LRA_VB', blank=True, null=True)  # Field name made lowercase.
-    lra_gl = models.BigIntegerField(db_column='LRA_GL', blank=True, null=True)  # Field name made lowercase.
-    dp_s2016 = models.BigIntegerField(db_column='DP_S2016', blank=True, null=True)  # Field name made lowercase.
-    bp_s2016 = models.BigIntegerField(db_column='BP_S2016', blank=True, null=True)  # Field name made lowercase.
-    op_s2016 = models.BigIntegerField(db_column='OP_S2016', blank=True, null=True)  # Field name made lowercase.
-    condstruc = models.BigIntegerField(db_column='CondStruc', blank=True, null=True)  # Field name made lowercase.
-    condbu = models.BigIntegerField(db_column='CondBU', blank=True, null=True)  # Field name made lowercase.
-    taxbalyear = models.BigIntegerField(db_column='TaxBalYear', blank=True, null=True)  # Field name made lowercase.
-    yrstaxdeli = models.BigIntegerField(db_column='YrsTaxDeli', blank=True, null=True)  # Field name made lowercase.
-    taxbal = models.FloatField(db_column='TaxBal', blank=True, null=True)  # Field name made lowercase.
-    forpropcat = models.BigIntegerField(db_column='ForPropCat', blank=True, null=True)  # Field name made lowercase.
-    forbu_10 = models.BigIntegerField(db_column='ForBU_10', blank=True, null=True)  # Field name made lowercase.
-    forbu_2 = models.BigIntegerField(db_column='ForBU_2', blank=True, null=True)  # Field name made lowercase.
-    forbu_5 = models.BigIntegerField(db_column='ForBU_5', blank=True, null=True)  # Field name made lowercase.
-    formc_10 = models.BigIntegerField(db_column='ForMC_10', blank=True, null=True)  # Field name made lowercase.
-    formc_2 = models.BigIntegerField(db_column='ForMC_2', blank=True, null=True)  # Field name made lowercase.
-    formc_5 = models.BigIntegerField(db_column='ForMC_5', blank=True, null=True)  # Field name made lowercase.
-    forvbrp_10 = models.BigIntegerField(db_column='ForVBRP_10', blank=True, null=True)  # Field name made lowercase.
-    forvbrp_2 = models.BigIntegerField(db_column='ForVBRP_2', blank=True, null=True)  # Field name made lowercase.
-    forvbrp_5 = models.BigIntegerField(db_column='ForVBRP_5', blank=True, null=True)  # Field name made lowercase.
-    foryard_10 = models.BigIntegerField(db_column='ForYard_10', blank=True, null=True)  # Field name made lowercase.
-    foryard_2 = models.BigIntegerField(db_column='ForYard_2', blank=True, null=True)  # Field name made lowercase.
-    foryard_5 = models.BigIntegerField(db_column='ForYard_5', blank=True, null=True)  # Field name made lowercase.
-    lra_aqdate = models.TextField(db_column='LRA_AqDate', blank=True, null=True)  # Field name made lowercase.
-    lra_enterd = models.TextField(db_column='LRA_EnterD', blank=True, null=True)  # Field name made lowercase.
-    lra_aqyear = models.BigIntegerField(db_column='LRA_AqYear', blank=True, null=True)  # Field name made lowercase.
-    lra_tenure = models.BigIntegerField(db_column='LRA_Tenure', blank=True, null=True)  # Field name made lowercase.
-    lra_usage = models.TextField(db_column='LRA_Usage', blank=True, null=True)  # Field name made lowercase.
-    lra_aqtype = models.TextField(db_column='LRA_AqType', blank=True, null=True)  # Field name made lowercase.
-    lra_status = models.TextField(db_column='LRA_Status', blank=True, null=True)  # Field name made lowercase.
-    td3 = models.BigIntegerField(db_column='TD3', blank=True, null=True)  # Field name made lowercase.
-    td5 = models.BigIntegerField(db_column='TD5', blank=True, null=True)  # Field name made lowercase.
-    yrsvacant = models.BigIntegerField(db_column='YrsVacant', blank=True, null=True)  # Field name made lowercase.
-    bldgscom = models.BigIntegerField(db_column='BldgsCom', blank=True, null=True)  # Field name made lowercase.
-    comcat = models.TextField(db_column='ComCat', blank=True, null=True)  # Field name made lowercase.
-    comtype = models.BigIntegerField(db_column='ComType', blank=True, null=True)  # Field name made lowercase.
-    comgrdflr = models.BigIntegerField(db_column='ComGrdFlr', blank=True, null=True)  # Field name made lowercase.
-    comstories = models.TextField(db_column='ComStories', blank=True, null=True)  # Field name made lowercase.
-    comyrblt = models.BigIntegerField(db_column='ComYrBlt', blank=True, null=True)  # Field name made lowercase.
-    comconst = models.TextField(db_column='ComConst', blank=True, null=True)  # Field name made lowercase.
-    comapts = models.BigIntegerField(db_column='ComApts', blank=True, null=True)  # Field name made lowercase.
-    bldgsres = models.BigIntegerField(db_column='BldgsRes', blank=True, null=True)  # Field name made lowercase.
-    resunits = models.BigIntegerField(db_column='ResUnits', blank=True, null=True)  # Field name made lowercase.
-    resocctype = models.TextField(db_column='ResOccType', blank=True, null=True)  # Field name made lowercase.
-    resbsmt = models.TextField(db_column='ResBsmt', blank=True, null=True)  # Field name made lowercase.
-    resbmfin = models.TextField(db_column='ResBmFin', blank=True, null=True)  # Field name made lowercase.
-    resextwall = models.TextField(db_column='ResExtWall', blank=True, null=True)  # Field name made lowercase.
-    reslivarea = models.BigIntegerField(db_column='ResLivArea', blank=True, null=True)  # Field name made lowercase.
-    resstories = models.TextField(db_column='ResStories', blank=True, null=True)  # Field name made lowercase.
-    resfullbat = models.BigIntegerField(db_column='ResFullBat', blank=True, null=True)  # Field name made lowercase.
-    reshlfbath = models.BigIntegerField(db_column='ResHlfBath', blank=True, null=True)  # Field name made lowercase.
-    resac = models.BigIntegerField(db_column='ResAC', blank=True, null=True)  # Field name made lowercase.
-    resacwin = models.BigIntegerField(db_column='ResACwin', blank=True, null=True)  # Field name made lowercase.
-    resch = models.BigIntegerField(db_column='ResCH', blank=True, null=True)  # Field name made lowercase.
-    resattic = models.BigIntegerField(db_column='ResAttic', blank=True, null=True)  # Field name made lowercase.
-    resgarage = models.BigIntegerField(db_column='ResGarage', blank=True, null=True)  # Field name made lowercase.
-    resyrblt = models.BigIntegerField(db_column='ResYrBlt', blank=True, null=True)  # Field name made lowercase.
-    acres_1 = models.FloatField(db_column='Acres_1', blank=True, null=True)  # Field name made lowercase.
-    cityblock = models.FloatField(db_column='CityBlock', blank=True, null=True)  # Field name made lowercase.
-    parcel = models.BigIntegerField(db_column='Parcel', blank=True, null=True)  # Field name made lowercase.
-    ownercode = models.BigIntegerField(db_column='OwnerCode', blank=True, null=True)  # Field name made lowercase.
-    parcelid = models.BigIntegerField(db_column='ParcelID', blank=True, null=True)  # Field name made lowercase.
-    lowaddnum = models.BigIntegerField(db_column='LowAddNum', blank=True, null=True)  # Field name made lowercase.
-    lowaddsuf = models.TextField(db_column='LowAddSuf', blank=True, null=True)  # Field name made lowercase.
-    highaddnum = models.BigIntegerField(db_column='HighAddNum', blank=True, null=True)  # Field name made lowercase.
-    highaddsuf = models.TextField(db_column='HighAddSuf', blank=True, null=True)  # Field name made lowercase.
-    stpredir = models.TextField(db_column='StPreDir', blank=True, null=True)  # Field name made lowercase.
-    stname = models.TextField(db_column='StName', blank=True, null=True)  # Field name made lowercase.
-    sttype = models.TextField(db_column='StType', blank=True, null=True)  # Field name made lowercase.
-    stsufdir = models.TextField(db_column='StSufDir', blank=True, null=True)  # Field name made lowercase.
-    ownername = models.TextField(db_column='OwnerName', blank=True, null=True)  # Field name made lowercase.
-    ownername2 = models.TextField(db_column='OwnerName2', blank=True, null=True)  # Field name made lowercase.
-    owneraddr = models.TextField(db_column='OwnerAddr', blank=True, null=True)  # Field name made lowercase.
-    ownercity = models.TextField(db_column='OwnerCity', blank=True, null=True)  # Field name made lowercase.
-    ownerstate = models.TextField(db_column='OwnerState', blank=True, null=True)  # Field name made lowercase.
-    ownerzip = models.BigIntegerField(db_column='OwnerZIP', blank=True, null=True)  # Field name made lowercase.
-    asrclassco = models.BigIntegerField(db_column='AsrClassCo', blank=True, null=True)  # Field name made lowercase.
-    asrlanduse = models.BigIntegerField(db_column='AsrLandUse', blank=True, null=True)  # Field name made lowercase.
-    specbusdis = models.BigIntegerField(db_column='SpecBusDis', blank=True, null=True)  # Field name made lowercase.
-    specbusd_1 = models.BigIntegerField(db_column='SpecBusD_1', blank=True, null=True)  # Field name made lowercase.
-    tifdist = models.BigIntegerField(db_column='TIFDist', blank=True, null=True)  # Field name made lowercase.
-    asdland = models.TextField(db_column='AsdLand', blank=True, null=True)  # Field name made lowercase.
-    asdimprove = models.TextField(db_column='AsdImprove', blank=True, null=True)  # Field name made lowercase.
-    asdtotal = models.TextField(db_column='AsdTotal', blank=True, null=True)  # Field name made lowercase.
-    billland = models.TextField(db_column='BillLand', blank=True, null=True)  # Field name made lowercase.
-    billimprov = models.TextField(db_column='BillImprov', blank=True, null=True)  # Field name made lowercase.
-    billtotal = models.TextField(db_column='BillTotal', blank=True, null=True)  # Field name made lowercase.
-    aprland = models.TextField(db_column='AprLand', blank=True, null=True)  # Field name made lowercase.
-    costaprimp = models.TextField(db_column='CostAprImp', blank=True, null=True)  # Field name made lowercase.
-    cdalanduse = models.BigIntegerField(db_column='CDALandUse', blank=True, null=True)  # Field name made lowercase.
-    zoning = models.TextField(db_column='Zoning', blank=True, null=True)  # Field name made lowercase.
-    ressalepri = models.BigIntegerField(db_column='ResSalePri', blank=True, null=True)  # Field name made lowercase.
-    ressaledat = models.TextField(db_column='ResSaleDat', blank=True, null=True)  # Field name made lowercase.
-    vacbldgyea = models.BigIntegerField(db_column='VacBldgYea', blank=True, null=True)  # Field name made lowercase.
-    geocityblo = models.FloatField(db_column='GeoCityBlo', blank=True, null=True)  # Field name made lowercase.
-    ward10 = models.BigIntegerField(db_column='Ward10', blank=True, null=True)  # Field name made lowercase.
-    precinct10 = models.BigIntegerField(db_column='Precinct10', blank=True, null=True)  # Field name made lowercase.
-    nbrhd_x = models.BigIntegerField(db_column='Nbrhd_x', blank=True, null=True)  # Field name made lowercase.
-    cdadist = models.BigIntegerField(db_column='CDADist', blank=True, null=True)  # Field name made lowercase.
-    cdasubdist = models.BigIntegerField(db_column='CDASubDist', blank=True, null=True)  # Field name made lowercase.
-    policedist = models.BigIntegerField(db_column='PoliceDist', blank=True, null=True)  # Field name made lowercase.
-    censtract1 = models.BigIntegerField(db_column='CensTract1', blank=True, null=True)  # Field name made lowercase.
-    censblock1 = models.BigIntegerField(db_column='CensBlock1', blank=True, null=True)  # Field name made lowercase.
-    houseconsd = models.BigIntegerField(db_column='HouseConsD', blank=True, null=True)  # Field name made lowercase.
-    zip = models.BigIntegerField(db_column='ZIP', blank=True, null=True)  # Field name made lowercase.
-    onfloodblo = models.BigIntegerField(db_column='OnFloodBlo', blank=True, null=True)  # Field name made lowercase.
-    giscityblo = models.FloatField(db_column='GisCityBLo', blank=True, null=True)  # Field name made lowercase.
-    gisparcel = models.BigIntegerField(db_column='GisParcel', blank=True, null=True)  # Field name made lowercase.
-    gisownerco = models.BigIntegerField(db_column='GisOwnerCo', blank=True, null=True)  # Field name made lowercase.
-    parcel9 = models.BigIntegerField(db_column='Parcel9', blank=True, null=True)  # Field name made lowercase.
-    vb_demock = models.BigIntegerField(db_column='VB_DemoCk', blank=True, null=True)  # Field name made lowercase.
-    notvacant = models.BigIntegerField(db_column='NOTvacant', blank=True, null=True)  # Field name made lowercase.
-    yardchg5_2 = models.BigIntegerField(db_column='YardChg5_2', blank=True, null=True)  # Field name made lowercase.
-    handle_13 = models.BigIntegerField(db_column='Handle__13', blank=True, null=True)  # Field name made lowercase. Field renamed because it contained more than one '_' in a row.
-    owner = models.TextField(db_column='Owner', blank=True, null=True)  # Field name made lowercase.
-    vl_g = models.BigIntegerField(db_column='VL_G', blank=True, null=True)  # Field name made lowercase.
-    vaccattxt = models.TextField(db_column='VacCatTxt', blank=True, null=True)  # Field name made lowercase.
-    asdttl2 = models.BigIntegerField(db_column='AsdTtl2', blank=True, null=True)  # Field name made lowercase.
-    frontage_x = models.FloatField(db_column='Frontage_x', blank=True, null=True)  # Field name made lowercase.
-    handledbl_y = models.BigIntegerField(db_column='HandleDbl_y', blank=True, null=True)  # Field name made lowercase.
-    frontage_y = models.FloatField(db_column='Frontage_y', blank=True, null=True)  # Field name made lowercase.
-    nbrhd_y = models.BigIntegerField(db_column='Nbrhd_y', blank=True, null=True)  # Field name made lowercase.
-    asrnbrhd = models.BigIntegerField(db_column='AsrNbrhd', blank=True, null=True)  # Field name made lowercase.
-    neigh_field = models.FloatField(db_column='Neigh #', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters. Field renamed because it ended with '_'.
-    neighborhood_name = models.TextField(db_column='Neighborhood Name', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    assessors_neigh = models.FloatField(db_column='Assessors Neigh', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    vacant_land_sq_ft_price = models.FloatField(db_column='Vacant Land Sq. Ft. Price', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    vacant_vandalized_residential_buildings_per_unit = models.FloatField(db_column='Vacant Vandalized Residential Buildings per Unit', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    residential_new_construction = models.FloatField(db_column='Residential New Construction', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    side_lots = models.FloatField(db_column='Side Lots', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
-    frontage = models.FloatField(blank=True, null=True)
-    sqft = models.FloatField(db_column='SqFt', blank=True, null=True)  # Field name made lowercase.
-    bldg_price = models.FloatField(blank=True, null=True)
-    vacant_price = models.FloatField(blank=True, null=True)
-    side_lot_price = models.FloatField(blank=True, null=True)
-
+    gid = models.AutoField(primary_key=True)
+    objectid = models.BigIntegerField(blank=True, null=True)
+    handle = models.CharField(max_length=16, blank=True, null=True)
+    siteaddr = models.CharField(max_length=40, blank=True, null=True)
+    inside_x = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    inside_y = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    acres = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    handledbl = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    fid_1 = models.BigIntegerField(blank=True, null=True)
+    objectid_1 = models.BigIntegerField(blank=True, null=True)
+    handle_1 = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    siteaddr_1 = models.CharField(max_length=254, blank=True, null=True)
+    handle_12 = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    ownercat = models.CharField(max_length=254, blank=True, null=True)
+    vl_final = models.BigIntegerField(blank=True, null=True)
+    vb_final = models.BigIntegerField(blank=True, null=True)
+    vl_a = models.BigIntegerField(blank=True, null=True)
+    vl_b = models.BigIntegerField(blank=True, null=True)
+    vl_c = models.BigIntegerField(blank=True, null=True)
+    vl_d = models.BigIntegerField(blank=True, null=True)
+    vl_e = models.BigIntegerField(blank=True, null=True)
+    vl_f = models.BigIntegerField(blank=True, null=True)
+    vb_a = models.BigIntegerField(blank=True, null=True)
+    vb_b = models.BigIntegerField(blank=True, null=True)
+    vb_c = models.BigIntegerField(blank=True, null=True)
+    vb_d = models.BigIntegerField(blank=True, null=True)
+    vb_e = models.BigIntegerField(blank=True, null=True)
+    vb_f = models.BigIntegerField(blank=True, null=True)
+    vb_g = models.BigIntegerField(blank=True, null=True)
+    vb_h = models.BigIntegerField(blank=True, null=True)
+    bd_vb17 = models.BigIntegerField(blank=True, null=True)
+    lu1010 = models.BigIntegerField(blank=True, null=True)
+    prclhasbld = models.BigIntegerField(blank=True, null=True)
+    prclnobldg = models.BigIntegerField(blank=True, null=True)
+    for_vb18 = models.BigIntegerField(blank=True, null=True)
+    for_vl18 = models.BigIntegerField(blank=True, null=True)
+    lra_vl = models.BigIntegerField(blank=True, null=True)
+    lra_vb = models.BigIntegerField(blank=True, null=True)
+    lra_gl = models.BigIntegerField(blank=True, null=True)
+    dp_s2016 = models.BigIntegerField(blank=True, null=True)
+    bp_s2016 = models.BigIntegerField(blank=True, null=True)
+    op_s2016 = models.BigIntegerField(blank=True, null=True)
+    condstruc = models.BigIntegerField(blank=True, null=True)
+    condbu = models.BigIntegerField(blank=True, null=True)
+    taxbalyear = models.BigIntegerField(blank=True, null=True)
+    yrstaxdeli = models.BigIntegerField(blank=True, null=True)
+    taxbal = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    forpropcat = models.BigIntegerField(blank=True, null=True)
+    forbu_10 = models.BigIntegerField(blank=True, null=True)
+    forbu_2 = models.BigIntegerField(blank=True, null=True)
+    forbu_5 = models.BigIntegerField(blank=True, null=True)
+    formc_10 = models.BigIntegerField(blank=True, null=True)
+    formc_2 = models.BigIntegerField(blank=True, null=True)
+    formc_5 = models.BigIntegerField(blank=True, null=True)
+    forvbrp_10 = models.BigIntegerField(blank=True, null=True)
+    forvbrp_2 = models.BigIntegerField(blank=True, null=True)
+    forvbrp_5 = models.BigIntegerField(blank=True, null=True)
+    foryard_10 = models.BigIntegerField(blank=True, null=True)
+    foryard_2 = models.BigIntegerField(blank=True, null=True)
+    foryard_5 = models.BigIntegerField(blank=True, null=True)
+    lra_aqdate = models.DateField(blank=True, null=True)
+    lra_enterd = models.DateField(blank=True, null=True)
+    lra_aqyear = models.BigIntegerField(blank=True, null=True)
+    lra_tenure = models.BigIntegerField(blank=True, null=True)
+    lra_usage = models.CharField(max_length=254, blank=True, null=True)
+    lra_aqtype = models.CharField(max_length=254, blank=True, null=True)
+    lra_status = models.CharField(max_length=254, blank=True, null=True)
+    td3 = models.BigIntegerField(blank=True, null=True)
+    td5 = models.BigIntegerField(blank=True, null=True)
+    yrsvacant = models.BigIntegerField(blank=True, null=True)
+    bldgscom = models.BigIntegerField(blank=True, null=True)
+    comcat = models.CharField(max_length=254, blank=True, null=True)
+    comtype = models.BigIntegerField(blank=True, null=True)
+    comgrdflr = models.BigIntegerField(blank=True, null=True)
+    comstories = models.CharField(max_length=254, blank=True, null=True)
+    comyrblt = models.BigIntegerField(blank=True, null=True)
+    comconst = models.CharField(max_length=254, blank=True, null=True)
+    comapts = models.BigIntegerField(blank=True, null=True)
+    bldgsres = models.BigIntegerField(blank=True, null=True)
+    resunits = models.BigIntegerField(blank=True, null=True)
+    resocctype = models.CharField(max_length=254, blank=True, null=True)
+    resbsmt = models.CharField(max_length=254, blank=True, null=True)
+    resbmfin = models.CharField(max_length=254, blank=True, null=True)
+    resextwall = models.CharField(max_length=254, blank=True, null=True)
+    reslivarea = models.BigIntegerField(blank=True, null=True)
+    resstories = models.CharField(max_length=254, blank=True, null=True)
+    resfullbat = models.BigIntegerField(blank=True, null=True)
+    reshlfbath = models.BigIntegerField(blank=True, null=True)
+    resac = models.BigIntegerField(blank=True, null=True)
+    resacwin = models.BigIntegerField(blank=True, null=True)
+    resch = models.BigIntegerField(blank=True, null=True)
+    resattic = models.BigIntegerField(blank=True, null=True)
+    resgarage = models.BigIntegerField(blank=True, null=True)
+    resyrblt = models.BigIntegerField(blank=True, null=True)
+    acres_1 = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    cityblock = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    parcel = models.BigIntegerField(blank=True, null=True)
+    ownercode = models.BigIntegerField(blank=True, null=True)
+    parcelid = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    lowaddnum = models.BigIntegerField(blank=True, null=True)
+    lowaddsuf = models.CharField(max_length=254, blank=True, null=True)
+    highaddnum = models.BigIntegerField(blank=True, null=True)
+    highaddsuf = models.CharField(max_length=254, blank=True, null=True)
+    stpredir = models.CharField(max_length=254, blank=True, null=True)
+    stname = models.CharField(max_length=254, blank=True, null=True)
+    sttype = models.CharField(max_length=254, blank=True, null=True)
+    stsufdir = models.CharField(max_length=254, blank=True, null=True)
+    ownername = models.CharField(max_length=254, blank=True, null=True)
+    ownername2 = models.CharField(max_length=254, blank=True, null=True)
+    owneraddr = models.CharField(max_length=254, blank=True, null=True)
+    ownercity = models.CharField(max_length=254, blank=True, null=True)
+    ownerstate = models.CharField(max_length=254, blank=True, null=True)
+    ownerzip = models.BigIntegerField(blank=True, null=True)
+    asrclassco = models.BigIntegerField(blank=True, null=True)
+    asrlanduse = models.BigIntegerField(blank=True, null=True)
+    specbusdis = models.BigIntegerField(blank=True, null=True)
+    specbusd_1 = models.BigIntegerField(blank=True, null=True)
+    tifdist = models.BigIntegerField(blank=True, null=True)
+    asdland = models.CharField(max_length=254, blank=True, null=True)
+    asdimprove = models.CharField(max_length=254, blank=True, null=True)
+    asdtotal = models.CharField(max_length=254, blank=True, null=True)
+    billland = models.CharField(max_length=254, blank=True, null=True)
+    billimprov = models.CharField(max_length=254, blank=True, null=True)
+    billtotal = models.CharField(max_length=254, blank=True, null=True)
+    aprland = models.CharField(max_length=254, blank=True, null=True)
+    costaprimp = models.CharField(max_length=254, blank=True, null=True)
+    cdalanduse = models.BigIntegerField(blank=True, null=True)
+    zoning = models.CharField(max_length=254, blank=True, null=True)
+    ressalepri = models.BigIntegerField(blank=True, null=True)
+    ressaledat = models.DateField(blank=True, null=True)
+    vacbldgyea = models.BigIntegerField(blank=True, null=True)
+    geocityblo = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    ward10 = models.BigIntegerField(blank=True, null=True)
+    precinct10 = models.BigIntegerField(blank=True, null=True)
+    nbrhd = models.BigIntegerField(blank=True, null=True)
+    cdadist = models.BigIntegerField(blank=True, null=True)
+    cdasubdist = models.BigIntegerField(blank=True, null=True)
+    policedist = models.BigIntegerField(blank=True, null=True)
+    censtract1 = models.BigIntegerField(blank=True, null=True)
+    censblock1 = models.BigIntegerField(blank=True, null=True)
+    houseconsd = models.BigIntegerField(blank=True, null=True)
+    zip = models.BigIntegerField(blank=True, null=True)
+    onfloodblo = models.BigIntegerField(blank=True, null=True)
+    giscityblo = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    gisparcel = models.BigIntegerField(blank=True, null=True)
+    gisownerco = models.BigIntegerField(blank=True, null=True)
+    parcel9 = models.BigIntegerField(blank=True, null=True)
+    vb_demock = models.BigIntegerField(blank=True, null=True)
+    notvacant = models.BigIntegerField(blank=True, null=True)
+    yardchg5_2 = models.BigIntegerField(blank=True, null=True)
+    handle_13 = models.DecimalField(db_column='handle__13', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row.
+    owner = models.CharField(max_length=254, blank=True, null=True)
+    vl_g = models.BigIntegerField(blank=True, null=True)
+    vaccattxt = models.CharField(max_length=50, blank=True, null=True)
+    geom = models.MultiPolygonField(srid=0, blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'vacant_parcels'
+
