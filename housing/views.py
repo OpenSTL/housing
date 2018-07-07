@@ -12,18 +12,15 @@ def vacant_parcels_byId(id):
     VacantParcelJson = serialize('json',VacantParcels.objects.get(pk=handel))
     JsonResponse(json.loads(VacantParcelJson))
 
-def homer(min_price,max_price,minSqft,nbrhd,plotChoice):
-    #VacantParcels.objects.filter(vacant_price_gte=min_price,vacant_price_lte=max_price,sqft_gt=minSqft)
-    BuildingFootprints.objects.filter('')
+def homer(minPrice,maxPrice,minSqft,nbrhd,plotChoice):
+    if intention == 'prevBuild':
+        query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
+    elif intention == 'currBuild':
+        query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
+    elif intention == 'noBuild':
+        query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
 
-
-def google_forward(request):
-    lat,lng = request.GET['lat'],request.GET['lng']
-    API_KEY = settings.API_KEYS['google_maps']
-    URI = "https://maps.googleapis.com/maps/api/geocode/json?latlng={lat},{lng}&key={API_KEY}".format(lat,lng,API_KEY)
-    r = requests.get(url = URI)
-    return JsonResponse(r.json())
-
+    VacantParcels.objects.filter(vacant_price_gte=min_price,vacant_price_lte=max_price,sqft_gt=minSqft)
 
 def publichousing(request):
     publichousingJson = serialize('geojson',PublicHousing.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
