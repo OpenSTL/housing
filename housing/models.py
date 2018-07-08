@@ -34,7 +34,6 @@ class Grocery(models.Model):
         managed = False
         db_table = 'grocery'
 
-
 class PublicHousing(models.Model):
     ogc_fid = models.AutoField(primary_key=True)
     loc_name = models.CharField(max_length=14, blank=True, null=True)
@@ -62,7 +61,6 @@ class PublicHousing(models.Model):
         managed = False
         db_table = 'public_housing'
 
-
 class Landmarks(models.Model):
     ogc_fid = models.AutoField(primary_key=True)
     st_louis_field = models.CharField(db_column='st__louis_', max_length=254, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row. Field renamed because it ended with '_'.
@@ -74,11 +72,28 @@ class Landmarks(models.Model):
         managed = False
         db_table = 'landmarks'
 
+class Prices(models.Model):
+    # perhaps change HANDLE name to lowercaese in DB
+    index = models.BigIntegerField(blank=True, null=True)
+    handle = models.BigIntegerField(db_column='HANDLE', blank=True, null=True)  # Field name made lowercase. 
+    #handle = models.CharField( max_length=16,db_column='HANDLE', blank=True, null=True)  # Field name made lowercase. 
+    bldg_price = models.FloatField(blank=True, null=True)
+    vb = models.TextField(db_column='VB', blank=True, null=True)  # Field name made lowercase.
+    new_construction_price = models.FloatField(blank=True, null=True)
+    nc = models.TextField(db_column='NC', blank=True, null=True)  # Field name made lowercase.
+    side_lot_price = models.FloatField(blank=True, null=True)
+    sl = models.TextField(db_column='SL', blank=True, null=True)  # Field name made lowercase.
+    vacant_lot_price = models.FloatField(blank=True, null=True)
+    vl = models.TextField(db_column='VL', blank=True, null=True)  # Field name made lowercase.
+    parcel = models.ForeignKey(VacantParcels,to_field='HANDLE') 
+    class Meta:
+        managed = False
+        db_table = 'prices'
 
 class VacantParcels(models.Model):
     gid = models.AutoField(primary_key=True)
     objectid = models.BigIntegerField(blank=True, null=True)
-    handle = models.CharField(max_length=16, blank=True, null=True)
+    handle = models.CharField(max_length=16, blank=True, null=True,unique=True)
     siteaddr = models.CharField(max_length=40, blank=True, null=True)
     inside_x = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
     inside_y = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)

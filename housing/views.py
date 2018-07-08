@@ -13,21 +13,19 @@ def vacant_parcels_byId(id):
     VacantParcelJson = serialize('json',VacantParcels.objects.get(pk=handel))
     JsonResponse(json.loads(VacantParcelJson))
 
-def homer(minPrice,maxPrice,minSqft,nbrhd,plotChoice):
-    #if intention == 'prevBuild':
-    #    query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
-    #elif intention == 'currBuild':
-    #    query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
-    #elif intention == 'noBuild':
-    #    query = "select geometry,price,address,SqFt,ownername from vacant_parcels limit 10"
-    userQuery = VacantParcels.objects.filter(vacant_price_gte=min_price,vacant_price_lte=max_price,sqft_gt=minSqft)
+def homer(minPrice,maxPrice,minAcres,nbrhd,plotChoice):
+    if intention == 'prevBuild':
+        userQuery = VacantParcels.objects.filter(bldg_price_gt=minPrice,bldg_price_lt=max_price,acres_gt=minAcers,nbrhd=nbrhd)
+    elif intention == 'currBuild':
+        userQuery = VacantParcels.objects.filter(bldg_price_gt=minPrice,bldg_price_lt=max_price,acres_gt=minAcers,nbrhd=nbrhd)
+    elif intention == 'noBuild':
+        userQuery = VacantParcels.objects.filter(bldg_price_gt=minPrice,bldg_price_lt=max_price,acres_gt=minAcers,nbrhd=nbrhd)
     if userQuery:
-        resultJson = serialize('geojson',PublicHousing.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
+        resultJson = serialize('geojson',userQuery.objects.order_by(prices_outcomes), geometry_field='wkb_geometry',fields=('id','handle',))
         return JsonResponse(json.loads(resultJson))
     else:
         return Http404 
 
-    VacantParcels.objects.filter(vacant_price_gte=min_price,vacant_price_lte=max_price,sqft_gt=minSqft)
 
 def publichousing(request):
     publichousingJson = serialize('geojson',PublicHousing.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
@@ -38,8 +36,8 @@ def publichousing(request):
         return Http404
 
 def publichousing_byId(id):
-    parcelJson = serialize('geojson',PublicHousing.objects.get(pk=id))
-    JsonResponse(json.loads(parcelJson))
+        parcelJson = serialize('geojson',PublicHousing.objects.get(pk=id))
+        JsonResponse(json.loads(parcelJson))
 
 def landmarks(request):
     landmarksJson = serialize('geojson',Landmarks.objects.all(), geometry_field='wkb_geometry',fields=('ogc_fid','st_louis_field ',))
