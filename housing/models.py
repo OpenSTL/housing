@@ -85,7 +85,7 @@ class Prices(models.Model):
     sl = models.TextField(db_column='SL', blank=True, null=True)  # Field name made lowercase.
     vacant_lot_price = models.FloatField(blank=True, null=True)
     vl = models.TextField(db_column='VL', blank=True, null=True)  # Field name made lowercase.
-    parcel = models.ForeignKey(VacantParcels,to_field='HANDLE') 
+    parcel = models.ForeignKey(VacantParcels,to_field='handle') 
     class Meta:
         managed = False
         db_table = 'prices'
@@ -245,6 +245,7 @@ class VacantParcels(models.Model):
     owner = models.CharField(max_length=254, blank=True, null=True)
     vl_g = models.BigIntegerField(blank=True, null=True)
     vaccattxt = models.CharField(max_length=50, blank=True, null=True)
+    price = models.ForeignKey(VacantParcels,to_field='HANDLE' )
     geom = models.MultiPolygonField(srid=0, blank=True, null=True)
     class Meta:
         managed = False

@@ -9,24 +9,34 @@ import json
 import requests
 #import json
 
+
+
+
+@require_GET()
 def vacant_parcels_byId(id):
-    VacantParcelJson = serialize('json',VacantParcels.objects.get(pk=handel))
+    VacantParcelJson = serialize('geojson',VacantParcels.objects.get(pk=id), geometry_field='geom',fields=('siteaddr', 'tifdist','acres' )))
     JsonResponse(json.loads(VacantParcelJson))
 
-def homer(minPrice,maxPrice,minAcres,nbrhd,plotChoice):
+@require_GET()
+def homer(request):
+    #(minPrice,maxPrice,minAcres,nbrhd,plotChoice)
+    GET = request.GET
+    userQuery = VacantParcels.objects.filter(acres_gt=GET['minAcers'],nbrhd=GET['nbrhd'])
     if intention == 'prevBuild':
-        userQuery = VacantParcels.objects.filter(bldg_price_gt=minPrice,bldg_price_lt=max_price,acres_gt=minAcers,nbrhd=nbrhd)
+        userQuery = userQuery.filter(price__bldg_price_gt=GET['minPrice'],price__bldg_price_lt=GET['maxPrice'])
     elif intention == 'currBuild':
-        userQuery = VacantParcels.objects.filter(bldg_price_gt=minPrice,bldg_price_lt=max_price,acres_gt=minAcers,nbrhd=nbrhd)
+        userQuery = userQuery.filter(price__new_construction_price_gt=GET['minPrice'], price__new_construction_price_lt=GET['maxPrice'])
     elif intention == 'noBuild':
-        userQuery = VacantParcels.objects.filter(bldg_price_gt=minPrice,bldg_price_lt=max_price,acres_gt=minAcers,nbrhd=nbrhd)
-    if userQuery:
-        resultJson = serialize('geojson',userQuery.objects.order_by(prices_outcomes), geometry_field='wkb_geometry',fields=('id','handle',))
+       userQuery = userQuery.filter(price__vacant_lot_price_gt=GET['minPrice'],price__vacant_lot_price_lt=GET['maxPrice'])
+    else: 
+        userQuery = userQuery.filter(price__side_lot_price_gt=GET['minPrice'], price__side_lot_price_lt=GET['maxPrice'])
+    resultJson = serialize('geojson',userQuery.objects.order_by(prices__outcomes), geometry_field='geom',fields=('siteaddr', 'tifdist','acres' ))
+    if  resultJson:
         return JsonResponse(json.loads(resultJson))
     else:
         return Http404 
 
-
+@require_GET()
 def publichousing(request):
     publichousingJson = serialize('geojson',PublicHousing.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
     if publichousingJson: 
@@ -35,10 +45,12 @@ def publichousing(request):
     else:
         return Http404
 
+@require_GET()
 def publichousing_byId(id):
         parcelJson = serialize('geojson',PublicHousing.objects.get(pk=id))
         JsonResponse(json.loads(parcelJson))
 
+@require_GET()
 def landmarks(request):
     landmarksJson = serialize('geojson',Landmarks.objects.all(), geometry_field='wkb_geometry',fields=('ogc_fid','st_louis_field ',))
     if landmarksJson: 
@@ -47,33 +59,10 @@ def landmarks(request):
     else:
         return Http404
 
+@require_GET()
 def landmarks_byId(id):
     parcelJson = serialize('geojson',Landmarks.objects.get(pk=id))
     JsonResponse(json.loads(parcelJson))
 
 
-
-def BuildingFootprints(request):
-    bldngsJson = serialize('geojson',BuildingFootprints.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
-    if lraJson: 
-        result = json.loads(lraJson)
-        return  JsonResponse(result) 
-    else:
-        return Http404
-
-def lra_byId(id):
-    parcelJson = serialize('geojson',Lra.objects.get(pk=id))
-    JsonResponse(json.loads(parcelJson))
-
-def getInfo(request,property_id):
-    import zillow 
-    with open("./bin/config/zillow_key.conf", 'r') as f:
-        key = f.readline().replace("\n", "")
-    api = zillow.ValuationApi()
-    property = get_object_or_404(Property, pk=property_id)
-    selected_property = property.property_list.get(pk=request.POST['address'])
-    address = selected_property + ', St. Louis, MO'
-    data = api.GetDeepSearchResults(key, address, postal_code)
-    return HttpResponse(json.dumps({'foo': 'bar'}), mimetype='application/json')
-    #return HttpResponseRedirect(reverse('property', args=(property.id,)))
 
