@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.gis.geos import Polygon
 from django.core.serializers import serialize 
 from django.http import HttpResponseRedirect, HttpResponse , JsonResponse, Http404
+#from django.views.decorators.http import require_GET 
 from django.urls import reverse
 #from models import BuildingFootprints,Landmarks,PublicHousing,VacantParcels
 from models import Landmarks,PublicHousing,VacantParcels
@@ -12,12 +13,10 @@ import requests
 
 
 
-@require_GET()
 def vacant_parcels_byId(id):
-    VacantParcelJson = serialize('geojson',VacantParcels.objects.get(pk=id), geometry_field='geom',fields=('siteaddr', 'tifdist','acres' )))
+    VacantParcelJson = serialize('geojson',VacantParcels.objects.get(pk=id), geometry_field='geom',fields=('siteaddr', 'tifdist','acres' ))
     JsonResponse(json.loads(VacantParcelJson))
 
-@require_GET()
 def homer(request):
     #(minPrice,maxPrice,minAcres,nbrhd,plotChoice)
     GET = request.GET
@@ -36,7 +35,6 @@ def homer(request):
     else:
         return Http404 
 
-@require_GET()
 def publichousing(request):
     publichousingJson = serialize('geojson',PublicHousing.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
     if publichousingJson: 
@@ -45,12 +43,10 @@ def publichousing(request):
     else:
         return Http404
 
-@require_GET()
 def publichousing_byId(id):
         parcelJson = serialize('geojson',PublicHousing.objects.get(pk=id))
         JsonResponse(json.loads(parcelJson))
 
-@require_GET()
 def landmarks(request):
     landmarksJson = serialize('geojson',Landmarks.objects.all(), geometry_field='wkb_geometry',fields=('ogc_fid','st_louis_field ',))
     if landmarksJson: 
@@ -59,7 +55,6 @@ def landmarks(request):
     else:
         return Http404
 
-@require_GET()
 def landmarks_byId(id):
     parcelJson = serialize('geojson',Landmarks.objects.get(pk=id))
     JsonResponse(json.loads(parcelJson))
