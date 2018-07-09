@@ -1,18 +1,18 @@
+from django.conf import settings
 from django.shortcuts import render
 from django.contrib.gis.geos import Polygon
 from django.core.serializers import serialize 
 from django.http import HttpResponseRedirect, HttpResponse , JsonResponse, Http404
-#from django.views.decorators.http import require_GET 
 from django.urls import reverse
 #from models import BuildingFootprints,Landmarks,PublicHousing,VacantParcels
 from models import Landmarks,PublicHousing,VacantParcels
 import json
-import requests
-#import json
 
 
 
-
+def index(request):
+    return render(request, 'index.html' )
+    
 def vacant_parcels_byId(id):
     VacantParcelJson = serialize('geojson',VacantParcels.objects.get(pk=id), geometry_field='geom',fields=('siteaddr', 'tifdist','acres' ))
     JsonResponse(json.loads(VacantParcelJson))

@@ -1,0 +1,130 @@
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Find Your Lot!</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+<link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<style>
+  body { margin:0; padding:0; }
+  
+  #map-container {
+    display: grid;
+    grid-column-gap: 10px;
+    grid-template-columns: 3fr 1fr;
+}
+  
+  #map {
+    grid-column-start: 1;
+    grid-column-end: 2;
+   }
+  
+  #form { 
+    grid-column-start: 2;
+    grid-column-end: 3;
+    padding: 20;
+    border-radius: 5px; 
+    background-color: #f2f2f2; 
+     }
+
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=text]:focus {
+    border: 3px solid #555;
+}
+
+input[type=button] {
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type=button]:hover {
+    background-color: #45a049;
+}
+
+select {
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #eeeaeaa4;
+}
+
+
+
+</style>
+</head>
+<body>
+<div id='map-container'>
+<div id='map'></div>
+<div id="form">
+  <form>
+    <p>What is your purpose. </p>
+    <select id="plotChoice" name="plotChoice">
+        <option value="Yes">Renovate a building</option>
+        <option value="No">Building a new building</option>
+        <option value="No">Buying a empty lot</option>
+    </select>
+    <p>Minumum Price: </p>
+    <input type="text" id=min_price ></input>
+    <p>Maximum Price: </p>
+    <input type="text" id=max_price ></input>
+    <p>What is the minimum sq.ft you are looking for? </p>
+    <input type="text" id=minSqft ></input>
+    <p>Is there a neighborhood you prefer? </p>
+    <select id="nbrhd" name="nbrhd">
+        <option>Select a Neighborhood</option>
+    </select>
+    <p>Close to a metro station? </p>
+    <select id="distanceToMetro" name="grocery">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+
+    <br/><br/><input type="button" value="Submit" oneClick="exchangeData()" ></input>
+  </form>
+</div>
+</div>
+
+<script>
+L.mapbox.accessToken = 'pk.eyJ1IjoibXJhbzIiLCJhIjoiY2ppZmFoazE5MGZiMjNwcXBtb3gyenk4cyJ9.nmFZofR-kOqj8yYfaJc2XQ';
+
+var map = L.mapbox.map('map','mapbox.streets').setView([38.6270, -90.1994], 12);
+var featurelayer = L.mapbox.featureLayer().addTo(map);
+featurelayer.loadURL("/publichousing/")
+        
+let dropdown = $('#nbrhd');
+const url = '/static/st-louis-neighborhoods.json';
+$.getJSON(url, function (data) {
+  $.each(data, function (key, entry) {
+    dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
+  })
+});
+</script>
+
+</body>
+</html>
