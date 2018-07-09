@@ -18,18 +18,19 @@ def vacant_parcels_byId(id):
     JsonResponse(json.loads(VacantParcelJson))
 
 def homer(request):
-    #(minPrice,maxPrice,minAcres,nbrhd,plotChoice)
     GET = request.GET
-    userQuery = VacantParcels.objects.filter(acres_gt=GET['minAcers'],nbrhd=GET['nbrhd'])
-    if intention == 'prevBuild':
-        userQuery = userQuery.filter(price__bldg_price_gt=GET['minPrice'],price__bldg_price_lt=GET['maxPrice'])
-    elif intention == 'currBuild':
-        userQuery = userQuery.filter(price__new_construction_price_gt=GET['minPrice'], price__new_construction_price_lt=GET['maxPrice'])
-    elif intention == 'noBuild':
-       userQuery = userQuery.filter(price__vacant_lot_price_gt=GET['minPrice'],price__vacant_lot_price_lt=GET['maxPrice'])
+    plotChoice = GET['plotChoice'] 
+    userQuery = VacantParcels.objects.filter(acres__gt=GET['minAcers'],nbrhd=GET['nbrhd'])
+    if plotChoice == 'prevBuild':
+        userQuery = userQuery.filter(price__bldg_price__gt=GET['minprice'],price__bldg_price__lt=GET['maxprice'])
+    elif plotChoice == 'currBuild':
+        userQuery = userQuery.filter(price__new_construction_price__gt=GET['minprice'], price__new_construction_price__lt=GET['maxprice'])
+    elif plotChoice == 'noBuild':
+       userQuery = userQuery.filter(price__vacant_lot_price__gt=GET['minprice'],price__vacant_lot_price__lt=GET['maxprice'])
     else: 
-        userQuery = userQuery.filter(price__side_lot_price_gt=GET['minPrice'], price__side_lot_price_lt=GET['maxPrice'])
-    resultJson = serialize('geojson',userQuery.objects.order_by(prices__outcomes), geometry_field='geom',fields=('siteaddr', 'tifdist','acres' ))
+        userQuery = userQuery.filter(price__side_lot_price__gt=GET['minprice'], price__side_lot_price__lt=GET['maxprice'])
+    print userQuery
+    resultJson = serialize('geojson',userQuery.order_by(price__outcomes), geometry_field='geom',fields=('siteaddr', 'tifdist','acres' ))
     if  resultJson:
         return JsonResponse(json.loads(resultJson))
     else:

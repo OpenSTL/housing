@@ -75,8 +75,8 @@ class Landmarks(models.Model):
 class Prices(models.Model):
     # perhaps change HANDLE name to lowercaese in DB
     index = models.BigIntegerField(blank=True, null=True)
-    handle = models.BigIntegerField(db_column='HANDLE', blank=True,unique=True, null=True)  # Field name made lowercase. 
-    #handle = models.CharField( max_length=16,db_column='HANDLE', blank=True, null=True)  # Field name made lowercase. 
+    #handle = models.BigIntegerField(db_column='HANDLE', blank=True,unique=True, null=True)  # Field name made lowercase. 
+    handle = models.CharField( max_length=16, unique=True , blank=True, null=True)  # Field name made lowercase. 
     bldg_price = models.FloatField(blank=True, null=True)
     vb = models.TextField(db_column='VB', blank=True, null=True)  # Field name made lowercase.
     new_construction_price = models.FloatField(blank=True, null=True)
