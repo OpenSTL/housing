@@ -5,7 +5,7 @@
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
   body { margin:0; padding:0; }
   
@@ -82,30 +82,26 @@ select {
 <div id='map-container'>
 <div id='map'></div>
 <div id="form">
-  <form>
+  <form id="searchForm">
     <p>What is your purpose. </p>
     <select id="plotChoice" name="plotChoice">
-        <option value="Yes">Renovate a building</option>
-        <option value="No">Building a new building</option>
-        <option value="No">Buying a empty lot</option>
+        <option value="prevBuild">Renovate a building</option>
+        <option value="currBuild">Building a new building</option>
+        <option value="noBuild">Buying a empty lot</option>
     </select>
     <p>Minumum Price: </p>
-    <input type="text" id=min_price ></input>
+    <input type="text" name="minprice" ></input>
     <p>Maximum Price: </p>
-    <input type="text" id=max_price ></input>
+    <input type="text" name=maxprice ></input>
     <p>What is the minimum sq.ft you are looking for? </p>
-    <input type="text" id=minSqft ></input>
-    <p>Is there a neighborhood you prefer? </p>
-    <select id="nbrhd" name="nbrhd">
-        <option>Select a Neighborhood</option>
+    <input type="text" name=minAcers></input>
+    <p>Is there a neighborhood you prefer? (Skip this step if you don't have a preference.) </p>
+    <select name="nbrhd" name="nbrhd">
+        <option value="any">Select a Neighborhood</option>
     </select>
-    <p>Close to a metro station? </p>
-    <select id="distanceToMetro" name="grocery">
-        <option value="Yes">Yes</option>
-        <option value="No">No</option>
-    </select>
+    
 
-    <br/><br/><input type="button" value="Submit" oneClick="exchangeData()" ></input>
+    <br/><br/><input type="button" value="Submit" onClick="exchangeData()" ></input>
   </form>
 </div>
 </div>
@@ -115,15 +111,39 @@ L.mapbox.accessToken = 'pk.eyJ1IjoibXJhbzIiLCJhIjoiY2ppZmFoazE5MGZiMjNwcXBtb3gye
 
 var map = L.mapbox.map('map','mapbox.streets').setView([38.6270, -90.1994], 12);
 var featurelayer = L.mapbox.featureLayer().addTo(map);
-featurelayer.loadURL("/publichousing/")
+/*featurelayer.loadURL("http://104.131.63.96/publichousing/")
+L.featureGroup([featurelayer])
+                .bindPopup('Hello world!')
+                .addTo(map); */   
+
         
 let dropdown = $('#nbrhd');
-const url = '/static/st-louis-neighborhoods.json';
+const url = 'http://thard.us:8000/static/st-louis-neighborhoods.json';
 $.getJSON(url, function (data) {
   $.each(data, function (key, entry) {
     dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
   })
 });
+
+function exchangeData() {
+    console.log($("#searchForm").serialize());
+    $.ajax({
+        type: "GET",
+        url: "http://thard.us:8000/homer/",
+        data: $("#searchForm").serialize(),
+        dataType: "json",
+        success: function(data){
+            var featurelayer = L.mapbox.featureLayer(data).addTo(map);
+            L.featureGroup([featurelayer])
+                .bindPopup(JSON.stringify(data))
+                .addTo(map);
+            
+        }
+
+    });
+}
+
+
 </script>
 
 </body>
