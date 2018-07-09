@@ -90,13 +90,13 @@ select {
         <option value="noBuild">Buying a empty lot</option>
     </select>
     <p>Minumum Price: </p>
-    <input type="text" name="minprice" ></input>
+    <input type="text" id=minprice ></input>
     <p>Maximum Price: </p>
-    <input type="text" name=maxprice ></input>
-    <p>What is the minimum sq.ft you are looking for? </p>
-    <input type="text" name=minAcers></input>
+    <input type="text" id=maxprice ></input>
+    <p>What is the minimum acres you are looking for? </p>
+    <input type="text" id=minSqft ></input>
     <p>Is there a neighborhood you prefer? (Skip this step if you don't have a preference.) </p>
-    <select name="nbrhd" name="nbrhd">
+    <select id="nbrhd" name="nbrhd">
         <option value="any">Select a Neighborhood</option>
     </select>
     
@@ -126,10 +126,9 @@ $.getJSON(url, function (data) {
 });
 
 function exchangeData() {
-    console.log($("#searchForm").serialize());
     $.ajax({
         type: "GET",
-        url: "http://thard.us:8000/homer/",
+        url: "http://104.131.63.96:8000/homer/",
         data: $("#searchForm").serialize(),
         dataType: "json",
         success: function(data){
