@@ -75,8 +75,7 @@ class Landmarks(models.Model):
 class Prices(models.Model):
     # perhaps change HANDLE name to lowercaese in DB
     index = models.BigIntegerField(blank=True, null=True)
-    #handle = models.BigIntegerField(db_column='HANDLE', blank=True,unique=True, null=True)  # Field name made lowercase. 
-    handle = models.CharField( max_length=16, unique=True , blank=True, null=True)  # Field name made lowercase. 
+    handle = models.CharField(primary_key=True ,max_length=16, unique=True , blank=True )  # Field name made lowercase. 
     bldg_price = models.FloatField(blank=True, null=True)
     vb = models.TextField(db_column='VB', blank=True, null=True)  # Field name made lowercase.
     new_construction_price = models.FloatField(blank=True, null=True)
@@ -85,46 +84,34 @@ class Prices(models.Model):
     sl = models.TextField(db_column='SL', blank=True, null=True)  # Field name made lowercase.
     vacant_lot_price = models.FloatField(blank=True, null=True)
     vl = models.TextField(db_column='VL', blank=True, null=True)  # Field name made lowercase.
-    #parcel = models.ForeignKey(VacantParcels ,to_field='handle') 
+    parcel = models.OneToOneField('FinalVacant',unique=True) 
     class Meta:
         managed = False
         db_table = 'prices'
 
-class VacantParcels(models.Model):
+class FinalVacant(models.Model):
     gid = models.AutoField(primary_key=True)
-    objectid = models.BigIntegerField(blank=True, null=True)
-    handle = models.CharField(max_length=16, blank=True, null=True,unique=True)
+    handle = models.CharField(max_length=16, blank=True, null=True, unique=True)
+    price = models.OneToOneField(Prices) 
     siteaddr = models.CharField(max_length=40, blank=True, null=True)
-    inside_x = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
-    inside_y = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
-    acres = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
-    handledbl = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
-    fid_1 = models.BigIntegerField(blank=True, null=True)
-    objectid_1 = models.BigIntegerField(blank=True, null=True)
-    handle_1 = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
-    siteaddr_1 = models.CharField(max_length=254, blank=True, null=True)
-    handle_12 = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
     ownercat = models.CharField(max_length=254, blank=True, null=True)
-    vl_final = models.BigIntegerField(blank=True, null=True)
-    vb_final = models.BigIntegerField(blank=True, null=True)
-    vl_a = models.BigIntegerField(blank=True, null=True)
-    vl_b = models.BigIntegerField(blank=True, null=True)
-    vl_c = models.BigIntegerField(blank=True, null=True)
-    vl_d = models.BigIntegerField(blank=True, null=True)
-    vl_e = models.BigIntegerField(blank=True, null=True)
-    vl_f = models.BigIntegerField(blank=True, null=True)
-    vb_a = models.BigIntegerField(blank=True, null=True)
-    vb_b = models.BigIntegerField(blank=True, null=True)
-    vb_c = models.BigIntegerField(blank=True, null=True)
-    vb_d = models.BigIntegerField(blank=True, null=True)
-    vb_e = models.BigIntegerField(blank=True, null=True)
-    vb_f = models.BigIntegerField(blank=True, null=True)
-    vb_g = models.BigIntegerField(blank=True, null=True)
-    vb_h = models.BigIntegerField(blank=True, null=True)
+    vl_final = models.CharField(max_length=254, blank=True, null=True)
+    vb_final = models.CharField(max_length=254, blank=True, null=True)
+    vl_a = models.CharField(max_length=254, blank=True, null=True)
+    vl_b = models.CharField(max_length=254, blank=True, null=True)
+    vl_c = models.CharField(max_length=254, blank=True, null=True)
+    vl_d = models.CharField(max_length=254, blank=True, null=True)
+    vl_e = models.CharField(max_length=254, blank=True, null=True)
+    vl_f = models.CharField(max_length=254, blank=True, null=True)
+    vb_a = models.CharField(max_length=254, blank=True, null=True)
+    vb_b = models.CharField(max_length=254, blank=True, null=True)
+    vb_c = models.CharField(max_length=254, blank=True, null=True)
+    vb_d = models.CharField(max_length=254, blank=True, null=True)
+    vb_e = models.CharField(max_length=254, blank=True, null=True)
+    vb_f = models.CharField(max_length=254, blank=True, null=True)
     bd_vb17 = models.BigIntegerField(blank=True, null=True)
     lu1010 = models.BigIntegerField(blank=True, null=True)
     prclhasbld = models.BigIntegerField(blank=True, null=True)
-    prclnobldg = models.BigIntegerField(blank=True, null=True)
     for_vb18 = models.BigIntegerField(blank=True, null=True)
     for_vl18 = models.BigIntegerField(blank=True, null=True)
     lra_vl = models.BigIntegerField(blank=True, null=True)
@@ -151,7 +138,6 @@ class VacantParcels(models.Model):
     foryard_10 = models.BigIntegerField(blank=True, null=True)
     foryard_2 = models.BigIntegerField(blank=True, null=True)
     foryard_5 = models.BigIntegerField(blank=True, null=True)
-    lra_aqdate = models.DateField(blank=True, null=True)
     lra_enterd = models.DateField(blank=True, null=True)
     lra_aqyear = models.BigIntegerField(blank=True, null=True)
     lra_tenure = models.BigIntegerField(blank=True, null=True)
@@ -185,7 +171,6 @@ class VacantParcels(models.Model):
     resattic = models.BigIntegerField(blank=True, null=True)
     resgarage = models.BigIntegerField(blank=True, null=True)
     resyrblt = models.BigIntegerField(blank=True, null=True)
-    acres_1 = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
     cityblock = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
     parcel = models.BigIntegerField(blank=True, null=True)
     ownercode = models.BigIntegerField(blank=True, null=True)
@@ -212,9 +197,6 @@ class VacantParcels(models.Model):
     asdland = models.CharField(max_length=254, blank=True, null=True)
     asdimprove = models.CharField(max_length=254, blank=True, null=True)
     asdtotal = models.CharField(max_length=254, blank=True, null=True)
-    billland = models.CharField(max_length=254, blank=True, null=True)
-    billimprov = models.CharField(max_length=254, blank=True, null=True)
-    billtotal = models.CharField(max_length=254, blank=True, null=True)
     aprland = models.CharField(max_length=254, blank=True, null=True)
     costaprimp = models.CharField(max_length=254, blank=True, null=True)
     cdalanduse = models.BigIntegerField(blank=True, null=True)
@@ -238,16 +220,24 @@ class VacantParcels(models.Model):
     gisparcel = models.BigIntegerField(blank=True, null=True)
     gisownerco = models.BigIntegerField(blank=True, null=True)
     parcel9 = models.BigIntegerField(blank=True, null=True)
-    vb_demock = models.BigIntegerField(blank=True, null=True)
-    notvacant = models.BigIntegerField(blank=True, null=True)
-    yardchg5_2 = models.BigIntegerField(blank=True, null=True)
-    handle_13 = models.DecimalField(db_column='handle__13', max_digits=65535, decimal_places=65535, blank=True, null=True)  # Field renamed because it contained more than one '_' in a row.
     owner = models.CharField(max_length=254, blank=True, null=True)
     vl_g = models.BigIntegerField(blank=True, null=True)
-    vaccattxt = models.CharField(max_length=50, blank=True, null=True)
-    price = models.ForeignKey(Prices,to_field='handle' )
+    bd_vb18 = models.BigIntegerField(blank=True, null=True)
+    vl_mck = models.BigIntegerField(blank=True, null=True)
+    vb = models.CharField(max_length=254, blank=True, null=True)
+    nc = models.CharField(max_length=254, blank=True, null=True)
+    sl = models.CharField(max_length=254, blank=True, null=True)
+    vl = models.CharField(max_length=254, blank=True, null=True)
+    handledbl = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    frontage = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    asrnbrhd = models.BigIntegerField(blank=True, null=True)
+    violations = models.BigIntegerField(blank=True, null=True)
+    acres = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    sqft = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
+    nhd_name = models.CharField(max_length=50, blank=True, null=True)
+    vaccattext = models.CharField(max_length=50, blank=True, null=True)
     geom = models.MultiPolygonField(srid=0, blank=True, null=True)
+
     class Meta:
         managed = False
-        db_table = 'vacant_parcels'
-
+        db_table = 'final_vacant'

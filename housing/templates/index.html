@@ -84,19 +84,19 @@ select {
 <div id="form">
   <form id="searchForm">
     <p>What is your purpose. </p>
-    <select id="plotChoice" name="plotChoice">
+    <select name="plotChoice" name="plotChoice">
         <option value="prevBuild">Renovate a building</option>
         <option value="currBuild">Building a new building</option>
         <option value="noBuild">Buying a empty lot</option>
     </select>
     <p>Minumum Price: </p>
-    <input type="text" id=minprice ></input>
+    <input type="text" name=minprice ></input>
     <p>Maximum Price: </p>
-    <input type="text" id=maxprice ></input>
+    <input type="text" name=maxprice ></input>
     <p>What is the minimum acres you are looking for? </p>
-    <input type="text" id=minSqft ></input>
+    <input type="text" name=minSqft ></input>
     <p>Is there a neighborhood you prefer? (Skip this step if you don't have a preference.) </p>
-    <select id="nbrhd" name="nbrhd">
+    <select name="nbrhd" name="nbrhd">
         <option value="any">Select a Neighborhood</option>
     </select>
     
@@ -121,7 +121,7 @@ let dropdown = $('#nbrhd');
 const url = 'http://thard.us:8000/static/st-louis-neighborhoods.json';
 $.getJSON(url, function (data) {
   $.each(data, function (key, entry) {
-    dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
+    dropdown.append($('<option></option>').attr('value', entry.name).text(entry.name));
   })
 });
 
