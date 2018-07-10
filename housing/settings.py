@@ -83,6 +83,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.spatialite',
         'NAME': 'housing',
+        'TEST': {
+            'NAME': 'housing_test'
+            }
     }
 }
 
@@ -106,7 +109,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = 'static/'
+STATIC_ROOT = 'static/'
 
 # cross origin request allowed 
 CORS_ORIGIN_WHITELIST = []
