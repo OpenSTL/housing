@@ -235,8 +235,7 @@ class FinalVacant(models.Model):
     sqft = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
     nhd_name = models.CharField(max_length=50, blank=True, null=True)
     vaccattext = models.CharField(max_length=50, blank=True, null=True)
-    geom = models.MultiPolygonField(srid=0, blank=True, null=True)
-
+    geom = models.MultiPolygonField(srid=2815, blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'final_vacant'

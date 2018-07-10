@@ -20,28 +20,33 @@ def vacant_parcels_byId(handle):
 def homer(request):
     GET = request.GET
     plotChoice = GET['plotChoice'] 
-    userQuery = FinalVacant.objects.filter(acres__gt=GET['minAcres'],nbrhd=GET['nbrhd'])
-    #print userQuery.query
-    if plotChoice == 'vb':
-        userQuery = userQuery.filter( price__bldg_price__gt=GET['minprice'],price__bldg_price__lt=GET['maxprice'])
+    if GET['nbrhd'] == 'any':
+        userQuery = FinalVacant.objects.all()
+        testQuery= userQuery.all()[:5]
+    else:
+        userQuery = FinalVacant.objects.all()
+        testQuery= userQuery.filter(nbrhd = GET['nbrhd'])
+    #if plotChoice == 'vb':
+        #userQuery = userQuery.filter( price__bldg_price__gt=GET['minprice'],price__bldg_price__lt=GET['maxprice'])
         # vb = vacant buliding 
-    elif plotChoice == 'nc':
-        userQuery = userQuery.filter( price__new_construction_price__gt=GET['minprice'],price__new_construction_price__lt=GET['maxprice'])
+    #elif plotChoice == 'nc':
+        #userQuery = userQuery.filter( price__new_construction_price__gt=GET['minprice'],price__new_construction_price__lt=GET['maxprice'])
         # nc = new contsruction 
-    elif plotChoice == 'sl':
-       userQuery = userQuery.filter( price__side_lot_price__gt=GET['minprice'], price__side_lot_price__lt=GET['maxprice'])
+    #elif plotChoice == 'sl':
+       #userQuery = userQuery.filter( price__side_lot_price__gt=GET['minprice'], price__side_lot_price__lt=GET['maxprice'])
         # vl = vacant lot 
-    else: 
+    #else: 
         # sl = sidelot 
-        userQuery = userQuery.filter( price__vacant_building_price__gt=GET['minprice'],  price__vacant_building_price__lt=GET['maxprice'])
-    resultJson = serialize('geojson',userQuery.all(), geometry_field='geom',fields=('siteaddr','resunits','acres','zoning','parcelid','zip'))
+        #userQuery = userQuery.filter( price__vacant_building_price__gt=GET['minprice'],  price__vacant_building_price__lt=GET['maxprice'])
+    #print len(userQuery)
+    resultJson = serialize('geojson',testQuery, geometry_field='geom',fields=('siteaddr','resunits','acres','zoning','parcelid','zip'))
     if  resultJson:
         return JsonResponse(json.loads(resultJson))
     else:
         return Http404 
 
 def publichousing(request):
-    publichousingJson = serialize('geojson',PublicHousing.objects.all(), geometry_field='wkb_geometry',fields=('id','handle',))
+    publichousingJson = serialize('geojson',PublicHousing.objects.all(), geometry_field='wkb_geometry',fields=('id','handle'))
     if publichousingJson: 
         result = json.loads(publichousingJson)
         return  JsonResponse(result) 
