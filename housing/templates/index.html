@@ -28,7 +28,7 @@
     background-color: #f2f2f2; 
      }
 
-  input[type=text], select {
+  input[type=number], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -37,7 +37,7 @@
     border-radius: 4px;
     box-sizing: border-box;
 }
-  input[type=text], select {
+  input[type=number], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -47,7 +47,7 @@
     box-sizing: border-box;
 }
 
-input[type=text]:focus {
+input[type=number]:focus {
     border: 3px solid #555;
 }
 
@@ -85,19 +85,19 @@ select {
   <form id="searchForm">
     <p>What is your purpose. </p>
     <select id="plotChoice" name="plotChoice">
-        <option value="prevBuild">Renovate a building</option>
-        <option value="currBuild">Building a new building</option>
-        <option value="noBuild">Buying a empty lot</option>
+        <option value="vb">Renovate a building</option>
+        <option value="nc">Building a new building</option>
+        <option value="sl">Buying a empty lot</option>
     </select>
     <p>Minumum Price: </p>
-    <input type="text" name="minprice" ></input>
+    <input type="number" name=minprice ></input>
     <p>Maximum Price: </p>
-    <input type="text" name=maxprice ></input>
-    <p>What is the minimum sq.ft you are looking for? </p>
-    <input type="text" name=minAcers></input>
+    <input type="number" name=maxprice ></input>
+    <p>What is the minimum acres you are looking for? </p>
+    <input type="number" name=minAcres ></input>
     <p>Is there a neighborhood you prefer? (Skip this step if you don't have a preference.) </p>
-    <select name="nbrhd" name="nbrhd">
-        <option value="any">Select a Neighborhood</option>
+    <select id="nbrhd" name="nbrhd">
+        <option value="0">Select a Neighborhood</option>
     </select>
     
 
@@ -126,7 +126,6 @@ $.getJSON(url, function (data) {
 });
 
 function exchangeData() {
-    console.log($("#searchForm").serialize());
     $.ajax({
         type: "GET",
         url: "http://thard.us:8000/homer/",
@@ -138,8 +137,10 @@ function exchangeData() {
                 .bindPopup(JSON.stringify(data))
                 .addTo(map);
             
+        },
+        error: function() {
+            alert("Error: Please redo the form.")
         }
-
     });
 }
 
