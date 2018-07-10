@@ -13,28 +13,28 @@ import json
 def index(request):
     return render(request, 'index.html' )
     
-def vacant_parcels_byId(id):
-    finalVacant = serialize('geojson',FinalVacant.objects.get(pk=id), geometry_field='geom',fields=('siteaddr','resunits','acres','zoning','parcelid','zip'))
+def vacant_parcels_byId(handle):
+    finalVacant = serialize('geojson',FinalVacant.objects.get(handle=handle), geometry_field='geom',fields=('siteaddr','resunits','acres','zoning','parcelid','zip'))
     JsonResponse(json.loads(VacantParcelJson))
 
 def homer(request):
     GET = request.GET
     plotChoice = GET['plotChoice'] 
     userQuery = FinalVacant.objects.filter(acres__gt=GET['minAcres'],nbrhd=GET['nbrhd'])
-    if plotChoice == 'vacant_building':
-        userQuery = userQuery.filter( price__vacant_building__gt=GET['minprice'],price__vacant_building__lt=GET['maxprice'])
-        # sl = sidelot 
-    elif plotChoice == 'new_construction':
-        userQuery = userQuery.filter( price__new_construction__gt=GET['minprice'],  price__new_construction__lt=GET['maxprice'])
+    #print userQuery.query
+    if plotChoice == 'vb':
+        userQuery = userQuery.filter( price__bldg_price__gt=GET['minprice'],price__bldg_price__lt=GET['maxprice'])
+        # vb = vacant buliding 
+    elif plotChoice == 'nc':
+        userQuery = userQuery.filter( price__new_construction_price__gt=GET['minprice'],price__new_construction_price__lt=GET['maxprice'])
         # nc = new contsruction 
-    elif plotChoice == 'vacant_lot':
-       userQuery = userQuery.filter( price__vacant_lot__gt=GET['minprice'], price__vacant_lot__lt=GET['maxprice'])
+    elif plotChoice == 'sl':
+       userQuery = userQuery.filter( price__side_lot_price__gt=GET['minprice'], price__side_lot_price__lt=GET['maxprice'])
         # vl = vacant lot 
     else: 
-        # vb = vacant buliding 
-        userQuery = userQuery.filter( price__vacant_building__gt=GET['minprice'],  price__vacant_building__lt=GET['maxprice'])
-    print userQuery
-    resultJson = serialize('geojson',userQuery.order_by( outcomes), geometry_field='geom',fields=('siteaddr', 'tifdist','acres' ))
+        # sl = sidelot 
+        userQuery = userQuery.filter( price__vacant_building_price__gt=GET['minprice'],  price__vacant_building_price__lt=GET['maxprice'])
+    resultJson = serialize('geojson',userQuery.all(), geometry_field='geom',fields=('siteaddr','resunits','acres','zoning','parcelid','zip'))
     if  resultJson:
         return JsonResponse(json.loads(resultJson))
     else:
