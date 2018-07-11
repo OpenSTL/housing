@@ -132,6 +132,9 @@ function exchangeData() {
         data: $("#searchForm").serialize(),
         dataType: "json",
         success: function(data){
+		if ( data.features.length == 0) { 
+			alert("no properties match your criteria");
+		}
             var featurelayer = L.mapbox.featureLayer(data).addTo(map);
             L.featureGroup([featurelayer])
                 .bindPopup(JSON.stringify(data))

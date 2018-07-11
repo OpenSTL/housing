@@ -25,7 +25,7 @@ def homer(request):
     plotChoice = GET['plotChoice'] 
     userQuery = FinalVacant.objects.all()
     if GET['nbrhd'] != '0':
-        userQuery = userQuery.filter(nbrhd = GET['nbrhd'])
+        userQuery = userQuery.filter(nbrhd =int( GET['nbrhd']))
     if 'maxprice' in GET or 'minprice' in GET:
         if plotChoice == 'vb':
         # vb = vacant buliding 
@@ -45,14 +45,8 @@ def homer(request):
                userQuery = userQuery.filter( price__side_lot_price__gt=GET['minprice'])
             if 'minprice' in GET:
                userQuery = userQuery.filter(price__side_lot_price__lt=GET['maxprice'])
-        else: 
-            # vl = vacant lot 
-            if 'maxprice' in GET: 
-                userQuery = userQuery.filter( price__vacant_building_price__gt=GET['minprice'])
-            if 'minprice' in GET:
-                userQuery = userQuery.filter( price__vacant_building_price__lt=GET['maxprice'])
-    #print len(userQuery)
-    resultJson = serialize('geojson',userQuery, geometry_field='geom',fields=('siteaddr','resunits','acres','zoning','parcelid','zip'))
+    print userQuery.query
+    resultJson = serialize('geojson',userQuery, geometry_field='geom',fields=('siteaddr','resunits','acres','zoning','parcelid','zip','vb','sl','nc','vl'))
     if  resultJson:
         return JsonResponse(json.loads(resultJson))
     else:
