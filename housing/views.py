@@ -4,7 +4,6 @@ from django.contrib.gis.geos import Polygon
 from django.core.serializers import serialize 
 from django.http import HttpResponseRedirect, HttpResponse , JsonResponse, Http404
 from django.urls import reverse
-#from models import BuildingFootprints,Landmarks,PublicHousing,FinalVacant
 from models import Landmarks,PublicHousing,FinalVacant
 import json
 
@@ -15,31 +14,45 @@ def index(request):
     
 def vacant_parcels_byId(handle):
     finalVacant = serialize('geojson',FinalVacant.objects.get(handle=handle), geometry_field='geom',fields=('siteaddr','resunits','acres','zoning','parcelid','zip'))
-    JsonResponse(json.loads(VacantParcelJson))
+    return JsonResponse(json.loads(finalVacant))
+
+def vacant_test(request):
+    finalVacant = serialize('geojson',FinalVacant.objects.filter(nbrhd=1)[:10], geometry_field='geom',fields=('siteaddr','resunits','acres','zoning','parcelid','zip'))
+    return JsonResponse(json.loads(finalVacant))
 
 def homer(request):
     GET = request.GET
     plotChoice = GET['plotChoice'] 
-    if GET['nbrhd'] == 'any':
-        userQuery = FinalVacant.objects.all()
-        testQuery= userQuery.all()[:5]
-    else:
-        userQuery = FinalVacant.objects.all()
-        testQuery= userQuery.filter(nbrhd = GET['nbrhd'])
-    #if plotChoice == 'vb':
-        #userQuery = userQuery.filter( price__bldg_price__gt=GET['minprice'],price__bldg_price__lt=GET['maxprice'])
+    userQuery = FinalVacant.objects.all()
+    if GET['nbrhd'] != '0':
+        userQuery = userQuery.filter(nbrhd = GET['nbrhd'])
+    if 'maxprice' in GET or 'minprice' in GET:
+        if plotChoice == 'vb':
         # vb = vacant buliding 
-    #elif plotChoice == 'nc':
-        #userQuery = userQuery.filter( price__new_construction_price__gt=GET['minprice'],price__new_construction_price__lt=GET['maxprice'])
-        # nc = new contsruction 
-    #elif plotChoice == 'sl':
-       #userQuery = userQuery.filter( price__side_lot_price__gt=GET['minprice'], price__side_lot_price__lt=GET['maxprice'])
-        # vl = vacant lot 
-    #else: 
-        # sl = sidelot 
-        #userQuery = userQuery.filter( price__vacant_building_price__gt=GET['minprice'],  price__vacant_building_price__lt=GET['maxprice'])
+            if 'maxprice' in GET: 
+                userQuery = userQuery.filter(price__bldg_price__lt=GET['maxprice'])
+            if 'minprice' in GET:
+                userQuery = userQuery.filter(price__bldg_price__gt=GET['minprice'])
+        elif plotChoice == 'nc':
+            # nc = new contsruction 
+            if 'maxprice' in GET: 
+                userQuery = userQuery.filter( price__new_construction_price__gt=GET['minprice'])
+            if 'minprice' in GET:
+                userQuery = userQuery.filter( price__new_construction_price__lt=GET['maxprice'])
+        elif plotChoice == 'sl':
+            # sl = sidelot 
+            if 'maxprice' in GET: 
+               userQuery = userQuery.filter( price__side_lot_price__gt=GET['minprice'])
+            if 'minprice' in GET:
+               userQuery = userQuery.filter(price__side_lot_price__lt=GET['maxprice'])
+        else: 
+            # vl = vacant lot 
+            if 'maxprice' in GET: 
+                userQuery = userQuery.filter( price__vacant_building_price__gt=GET['minprice'])
+            if 'minprice' in GET:
+                userQuery = userQuery.filter( price__vacant_building_price__lt=GET['maxprice'])
     #print len(userQuery)
-    resultJson = serialize('geojson',testQuery, geometry_field='geom',fields=('siteaddr','resunits','acres','zoning','parcelid','zip'))
+    resultJson = serialize('geojson',userQuery, geometry_field='geom',fields=('siteaddr','resunits','acres','zoning','parcelid','zip'))
     if  resultJson:
         return JsonResponse(json.loads(resultJson))
     else:
