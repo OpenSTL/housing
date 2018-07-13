@@ -6,7 +6,7 @@ django-cors-headers==2.2.0
 django-excel==0.0.10
 django-shapes==0.2.0
 djangorestframework==3.7.7
--e git+https://github.com/django-json-api/django-rest-framework-json-api.git@e501b0445da047f6672d7596486ceb9b027a66c7#egg=djangorestframework_jsonapi
+djangorestframework-jsonapi==2.5.0
 Flask==0.12.2
 future==0.16.0
 geos==0.2.1
