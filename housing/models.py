@@ -74,7 +74,6 @@ class Landmarks(models.Model):
 
 class Prices(models.Model):
     # perhaps change HANDLE name to lowercaese in DB
-    index = models.BigIntegerField(blank=True, null=True)
     handle = models.CharField(primary_key=True ,max_length=16, unique=True , blank=True )  # Field name made lowercase. 
     bldg_price = models.FloatField(blank=True, null=True)
     vb = models.TextField(db_column='VB', blank=True, null=True)  # Field name made lowercase.
@@ -84,15 +83,15 @@ class Prices(models.Model):
     sl = models.TextField(db_column='SL', blank=True, null=True)  # Field name made lowercase.
     vacant_lot_price = models.FloatField(blank=True, null=True)
     vl = models.TextField(db_column='VL', blank=True, null=True)  # Field name made lowercase.
-    parcel = models.OneToOneField('FinalVacant',unique=True) 
+    #parcel = models.OneToOneField('FinalVacant',db_column='handle') 
     class Meta:
         managed = False
         db_table = 'prices'
 
 class FinalVacant(models.Model):
     gid = models.AutoField(primary_key=True)
-    handle = models.CharField(max_length=16, blank=True, null=True, unique=True)
-    price = models.OneToOneField(Prices) 
+    #handle = models.CharField(max_length=16, blank=True, null=True, unique=True)
+    price = models.OneToOneField(Prices,db_column='handle') 
     siteaddr = models.CharField(max_length=40, blank=True, null=True)
     ownercat = models.CharField(max_length=254, blank=True, null=True)
     vl_final = models.CharField(max_length=254, blank=True, null=True)
@@ -236,8 +235,8 @@ class FinalVacant(models.Model):
     sqft = models.DecimalField(max_digits=65535, decimal_places=65535, blank=True, null=True)
     nhd_name = models.CharField(max_length=50, blank=True, null=True)
     vaccattext = models.CharField(max_length=50, blank=True, null=True)
-    geom = models.MultiPolygonField(srid=0, blank=True, null=True)
-
+    #geom = models.MultiPolygonField(srid='2815', blank=True, null=True)
+    geom = models.MultiPolygonField(  blank=True, null=True)
     class Meta:
         managed = False
         db_table = 'final_vacant'

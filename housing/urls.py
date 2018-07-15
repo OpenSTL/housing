@@ -8,8 +8,10 @@ from housing import views
 
 urlpatterns = [
     url(r'^$', views.index),
+    url(r'^index.html$', views.index),
     #url(r'^admin/', include(admin.site.urls)),
     url(r'^homer/', views.homer),
+    url(r'^test/', views.vacant_test),
     url(r'^landmarks/', views.landmarks),
     url(r'^landmarks/byId/(?P<id>d+)', views.landmarks_byId),
     url(r'^publichousing/', views.publichousing),
