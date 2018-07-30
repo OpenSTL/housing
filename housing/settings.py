@@ -81,12 +81,11 @@ WSGI_APPLICATION = 'housing.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'housing',
-        'TEST': {
-            'NAME': 'housing_test'
-            }
-    }
+        'USER': 'housing',
+        'PASSWORD': 'housing'
+        }
 }
 
 
