@@ -5,7 +5,7 @@
 <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
 <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <style>
   body { margin:0; padding:0; }
   
@@ -118,7 +118,7 @@ L.featureGroup([featurelayer])
 
         
 let dropdown = $('#nbrhd');
-const url = 'http://thard.us:8000/static/st-louis-neighborhoods.json';
+const url = 'https://thard.us/static/st-louis-neighborhoods.json';
 $.getJSON(url, function (data) {
   $.each(data, function (key, entry) {
     dropdown.append($('<option></option>').attr('value', entry.id).text(entry.name));
