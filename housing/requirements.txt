@@ -1,6 +1,6 @@
 certifi==2018.1.18
 chardet==3.0.4
-Django==1.11.11
+Django==1.11.29
 django-cors-headers==2.2.0
 idna==2.6
 psycopg2==2.7.4
