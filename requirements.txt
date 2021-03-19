@@ -3,7 +3,7 @@ chardet==3.0.4
 Django==1.11.14
 django-cors-headers==2.2.0
 django-rest-framework==0.1.0
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 djangorestframework-jsonapi==2.5.0
 idna==2.6
 inflection==0.3.1
